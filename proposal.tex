@@ -1,0 +1,69 @@
+Proposal
+
+Recent developments in machine learning have made significant 
+contributions to a wide range of fields that are not 
+traditionally considered data science.
+Notably the Netflix competition have attracted a collective
+effort in developing models that greatly improved prediction
+of movie ratings by different users,
+creating the best movie recommendation system at the time
+ [Feuerverger, He, Khatri (2012)] .
+This research project aims to apply the machine learning
+techniques in analyzing the student grade dataset used in 
+Bailey, Rosenthal, and Yoon (2012),
+allowing for further understanding of student behavior for
+course selection, inference on a student's potential grade
+in courses not selected, finally allowing for an estimate
+of a "fair" grade on the same set of courses.
+The potential application of the results include but limited to
+tuning difficulty of courses for fair grading, 
+predicting demand of courses,
+and improving admission selection process.
+
+The student grade dataset falls directly under a collaborative
+filtering problem, where a value or grade is assigned for
+some matches of students and courses.
+The greatest difficulty of this type of problem is the sparsity
+of data, where each student can only take a small subset of 
+courses, leaving majority of potential course grades missing.
+Additionally, data is not even distributed among courses, 
+where some courses can have few attendance.
+Therefore, common methods of inference will be difficult
+to perform with this type of problem.
+That being said, matrix factorization and restricted Boltzmann
+machines have been highly effective at collaborative filtering.
+This project intends to investigate these two techniques and
+the respective extensions with the student grade dataset.
+
+Matrix factorization technique decomposes a large low-rank
+matrix into a product of two low-rank matrices.
+Specifically for this problem, let A be the m-by-n matrix of grades,
+where A_ij corresponds to the grade of student i and course j,
+then we seek two matrices U m-by-d and V n-by-d such that
+
+A ~ UV'    where ' here denotes transpose
+
+By the Eckart-Young Theorem, given a best rank k-1 approximation
+of U and V, a best rank k approximation is obtained by adding
+a column to both U and V such that the product provides the
+best fit to the residual matrix A-UV'.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

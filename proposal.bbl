@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{BaRoYo14}
+Michael~A Bailey, Jeffrey~S Rosenthal, and Albert~H Yoon.
+\newblock Grades and incentives: assessing competing grade point average
+  measures and postgraduate outcomes.
+\newblock {\em Studies in Higher Education}, (ahead-of-print):1--15, 2014.
+
+\bibitem{FeHeKh12}
+Andrey Feuerverger, Yu~He, Shashi Khatri, et~al.
+\newblock Statistical significance of the netflix challenge.
+\newblock {\em Statistical Science}, 27(2):202--231, 2012.
+
+\bibitem{MnSa07}
+Andriy Mnih and Ruslan Salakhutdinov.
+\newblock Probabilistic matrix factorization.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1257--1264, 2007.
+
+\bibitem{Sa09}
+Ruslan Salakhutdinov.
+\newblock {\em Learning deep generative models}.
+\newblock PhD thesis, University of Toronto, 2009.
+
+\bibitem{SaMnHi07}
+Ruslan Salakhutdinov, Andriy Mnih, and Geoffrey Hinton.
+\newblock Restricted boltzmann machines for collaborative filtering.
+\newblock In {\em Proceedings of the 24th international conference on Machine
+  learning}, pages 791--798. ACM, 2007.
+
+\end{thebibliography}

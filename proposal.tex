@@ -41,7 +41,7 @@ Department of Statistical Sciences \\
 University of Toronto \\
 Phone: (416)843-9179\\
 Email: {\tt mufan.li@mail.utoronto.ca}\\
-\bigskip\large
+\bigskip\Large
 {\bf Assessing GPA Measures From a Collaborative Filtering
 Perspective}
 \end{center}
@@ -114,8 +114,10 @@ the $j$th row of $\mathbf{V}$.
 The row vectors may be interpreted as features,
 i.e. row $i$ of $\mathbf{U}$ contains all the information
 of student $i$.
-To optimize the rank $d$ approximation is 
-equivalent to minimizing the Frobenius norm of the difference
+% To optimize the rank $d$ approximation is 
+% equivalent to minimizing the Frobenius norm of the difference
+A common goal of optimization is to minimize the 
+Frobenius norm of the difference for a rank $d$ approximation
 $\left\Vert \mathbf{A - UV}^\top \right\Vert$,
 defined by the square root of the
 sum of squares of its entries \cite{FeHeKh12}.
@@ -157,10 +159,16 @@ However, one significant weakness is SVD cannot incorporate
 student or course specific information besides the grades.
 For example, a student's retaken or dropped courses cannot be easily
 used by SVD.
+Additionally, since the Frobenius norm cannot be computed for 
+unknown values, SVD fails to optimize for regions where
+the data is sparse.
 One extension of MF is by defining a probabilistic distribution 
-using the matrix product instead of directly using the value \cite{MnSa07}.
-Probabilistic MF can use the student or course 
-specific information to help define parameters of the distribution.
+using the matrix product as the mean.
+Under the probabilistic MF setup,
+we can shift the mean of the distribution based on 
+student and course specific information.
+In fact, \cite{MnSa07} showed incorporating the probabilistic MF
+successfully resolves both problems for the Netflix dataset.
 
 On the other hand, restricted Boltzmann machines (RBM) is a
 completely different approach to the problem.
@@ -205,7 +213,7 @@ net/.style={
     |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
 };
 \foreach \ai [count=\mi ]in {3,5,7,9}
-  \draw[<-] (mat-3-\ai) -- node[left] {Input \mi} +(0cm,-1.3);
+  \draw[<-] (mat-3-\ai) -- node[left] {Grade \mi} +(0cm,-1.3);
 \foreach \ai in {2,4,...,10}
 {\foreach \aii in {3,5,7,9}
   \draw[-] (mat-1-\ai) -- (mat-3-\aii);
@@ -213,30 +221,32 @@ net/.style={
 \end{tikzpicture}
 
 \caption{\label{fig:RBM}
-A restricted Boltzmann machine (RBM) with 4 input nodes and 
-5 hidden nodes.
+A restricted Boltzmann machine (RBM) with 4 courses and 5 hidden
+nodes for a specific student.
 }
 \end{figure}
 
 Suppose the graph have $N$ visible nodes and $M$ hidden nodes,
 with each visible node denoted $v_i$, hidden nodes denoted $h_j$, 
 weights between two nodes $w_{ij}$,
-and $b_i$ and $a_j$ be bias parameters.
-Let $\theta = \{ w_{ij},a_j,b_i \} \; \forall i,j$,
+$b_i$ and $a_j$ be bias parameters,
+and $\sigma_i$ be the standard deviation of grades for each course.
+Here each visible node $v_i$ represents the grade for course $i$,
+where a specific student is fixed.
+Let $\theta = \{ w_{ij},a_j,b_i,\sigma_i \} \; \forall i,j$,
 $\mathbf{v} = \{v_i\} \; \forall i$,
 and $\mathbf{h} = \{h_j\} \; \forall j$ denote the collections.
-Additionally, we simplify the model to binary values for explanation, 
-where all nodes take binary values, i.e. $v_i, h_j \in \{0,1\}$.
-This can be extended to a larger domain \cite{SaMnHi07}.
+Additionally, we let the hidden nodes only take on binary values, 
+i.e. $v_i \in \mathbb{R}, h_j \in \{0,1\}$.
 We can then define the energy function and 
 the joint distribution for the graph:
 %
 \begin{equation}
 \begin{aligned}
     E(\mathbf{v},\mathbf{h}|\theta) &= 
+        \displaystyle\sum_{i=1}^N \frac{(b_i - v_i)^2}{2 \sigma_i}
         - \displaystyle\sum_{i=1}^N \displaystyle\sum_{j=1}^M
-             w_{ij} v_i h_j 
-        - \displaystyle\sum_{i=1}^N b_i v_i
+             w_{ij} h_j \frac{v_i}{\sigma_i}
         - \displaystyle\sum_{i=j}^M a_j h_j \\
 % \end{equation}
 %
@@ -291,16 +301,16 @@ but can be determined by the energy function:
     P(v_p|\mathbf{v}) \propto
         \displaystyle\sum_{\mathbf{h}} 
         \exp[-E(v_p,\mathbf{v},\mathbf{h})]
-    = \prod_{j=1}^M \left( 1 + 
-        \exp\left[\sum_{i=1}^N w_{ij} v_i\right]
-        \right)
+    % = \prod_{j=1}^M \left( 1 + 
+    %     \exp\left[\sum_{i=1}^N w_{ij} v_i\right]
+    %     \right)
 % \end{aligned}
 \end{equation}
 
 Similar to probabilistic MF, RBM can also easily incorporate
 student specific information within the model.
 The RBM also has a natural extension into multiple layers
-called deep belief network (DBN) \cite{Sa09}.
+called deep belief networks (DBN) \cite{Sa09}.
 This type of networks can represent much more complex 
 relationships at a cost of more difficult optimization
 and expensive computation for inferencing.
@@ -312,35 +322,35 @@ in other collaborative filtering type problems.
 In this project, we hope to address the following questions:
 %
 \begin{itemize} \itemsep0pt \parskip0pt
-    \item Can the model correctly predict demand for (easier) courses
-        and grades for future courses given previous year's grades?
+    \item Can the model correctly predict
+        grades for future (or missing) courses given 
+        previous year's (or incomplete) grades?
     \item Does the current GPA measure appropriately represent
         academic abilities when students select easier courses to 
         improve grades?
 \end{itemize}
 
-First we note that demand for courses can be modeled by a binary variable
-of each student either taken or have not taken a specific course.
-Similar to grades, this variable for an additional course
-can be predicted in the same way as a missing course.
-With inference for grades, 
-we can estimate course average if all students have taken the course.
-As a result, 
-demand for courses can be compared to course difficulty,
+By leaving out some data during the optimization process,
+predictions on these data can be tested.
+This is commonly referred to the training data and test data
+in machine learning.
+With inference for missing grades, 
+we can correctly assess the prediction power of the model,
 answering the first question.
-
-Similar to predicting course average,
-we can estimate a student's grade for all the courses offered by the major.
+If grades are predicted for all courses that are available,
+we can estimate a ``fair'' grade for students as if 
+all students have taken the same courses.
 This allows grading of student abilities on comparable grounds,
 regardless of which courses the students have taken.
-Clearly student performance can be affected by much more
-complex and uncontrollable factors,
-but this hypothetical grade is sufficient for analysis of 
-whether easier courses contribute unfairly to grades.
 Finally, we can quantify the expected grade improvement 
 due to the course selection by optimizing 
-the courses for all students in the dataset,
-hence answering the second question.
+the choice of courses for all students in the dataset.
+This results in a hypothetical grade,
+comparing to the true grade answers the second question.
+% Clearly student performance can be affected by much more
+% complex and uncontrollable factors,
+% but this hypothetical grade is sufficient for analysis of 
+% whether easier courses systematically contribute unfairly to grades.
 
 We intend to fully protect the privacy of students 
 in the dataset during research by using completely anonymous data.

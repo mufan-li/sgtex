@@ -19,7 +19,10 @@
 % some standard packages
 \usepackage{times}
 \usepackage{graphics}
-\usepackage{subfigure, epsfig}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage{subfigure, epsfig}
 \usepackage{rotate}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -55,7 +58,8 @@ but passed through a non-linear function:
 \indent Here $g(\cdot)$ is a non-linear function, 
 with $\mb{x}$ is an $N$ dimensional input vector,
 and $\mb{w}$ is the weight vector.
-Common choices of $g(\cdot)$ for neural networks 
+Common choices of $g(\cdot)$, also known as activation functions,
+for neural networks 
 include the logistic (sigmoid) function, the hyperbolic tangent function, 
 and the rectified linear unit (ReLU):
 %
@@ -223,7 +227,7 @@ In the neural network case,
 the optimization becomes more difficult as
 the number of parameters increase with the number of nodes and layers.
 However, we can still apply the gradient descent method
-and find a local optimum.
+and find a local optimum for the simpler neural networks.
 
 Suppose we have a dataset $\mathcal{D} = \{\mb{x}^{[n]}, 
 \mb{y}^{[n]}\}, n \in \mathbb{N}$,
@@ -275,22 +279,26 @@ making the complex appearing expression above easy to compute.
 A common technique to improve speed of convergence is by adding momentum.
 The idea is to let the gradient dictate the acceleration of 
 the change in $\mb{w}^k$ instead of the velocity.
-This allows the optimization to move faster in the direction
+This allows the optimization to accumulate speed in the direction
 of the gradient, while making it harder to converge to a poor local minimum.
 The formulation starts with a velocity vector $\mb{v}^0$
 initialized to zero, and the rest in similar:
 %
 \begin{equation}
 \begin{aligned}
-	\mb{v}^{k+1} &= \mb{v}^{k} - \eta \; \nabla_{\mb{w}^k} 
+	\mb{v}^{k+1} &= \theta \mb{v}^{k} - \eta \; \nabla_{\mb{w}^k} 
 				E\left(f(\mb{x},\mb{w}^k),\mb{y}\right) \\
-	\mb{w}^{k+1} &= (1-\theta) \mb{w}^{k} + \theta \mb{v}^{k+1}
+	\mb{w}^{k+1} &= \mb{w}^{k} + \mb{v}^{k+1}
 \end{aligned}
 \end{equation}
 %
 where $\theta \in [0,1]$ is the momentum constant.
+Here choosing a larger $\theta$ would result in a stronger 
+preservation of velocity vector $\mb{v}$,
+which then improves momentum.
 
-\bigskip
+% formatting
+\pagebreak
 \noindent
 \large
 {\bf MNIST Hand-Written Digits}
@@ -319,7 +327,8 @@ the softmax function is chosen for the output layer:
 		{\sum_{k=1}^{N^{(4)}} \exp(z_k^{(3)})}
 \end{equation}
 %
-\indent As a result the sum of $f_l$ adds up to one.
+\indent As a result the sum of $f_l$ adds up to one,
+and the most optimal output is exactly the 1-of-K encoded label.
 If $f_l$ is modeled as the probability of the image being digit $l$,
 we can define the error function as negative log-likelihood:
 %
@@ -334,28 +343,69 @@ we can define the error function as negative log-likelihood:
 %
 where minimizing $E$ is equivalent to maximizing likelihood.
 
+In the following experiment, 
+a two hidden layer neural network is used to model the MNIST digits.
+We use 1000 nodes in each hidden layer, 
+creating a structure of 784-1000-1000-10 nodes in each layer.
+We also chose ReLU for $g(\cdot)$ in the hidden layers,
+and softmax for the output layer.
+The hyper parameters were chosen as $\eta = 10^{-5}$
+and $\theta = 0.9$.
+We also chose to update the weight vector $\mb{w}^k$ once
+for every 100 samples of digits,
+also known as a mini-batch.
 
+After training (optimizing) for 50 epochs,
+with each epoch denoting one complete run through of the training 
+dataset,
+we reach a test error rate of $16\%$.
+%
+\begin{figure}[h]
+\centering
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig_mnist_nll.png}
+  \caption{The negative log-likelihood}
+  \label{fig:mnist_nll}
+\end{subfigure}%
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{fig_mnist_err.png}
+  \caption{The classification error rate}
+  \label{fig:mnist_err}
+\end{subfigure}
+\caption{MNIST hand-written digits modeled using a two hidden
+  layer neural network, with negative log-likelihood and
+  classification error rate computed after each epoch.}
+\label{fig:mnist_results}
+\end{figure}
 
+By increasing the number of epochs and a few small modifications,
+this model could potentially reach error rates as low as $2\%$.
+However, this will not explored since it is not
+the main purpose of this document,
+and optimization can be very time consuming due to computation.
 
+It is important to note that the activation function chosen is ReLU, 
+which is not easy to incorporate due within a 
+restricted Boltzmann machine context due to an unbounded range.
+However, a recently introduced method called 
+general adversarial networks can be used instead using the ReLU functions
+in alternative to restricted Boltzmann machines.
+This will explored further in future discussions.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Also note, this type of neural networks is feed-forward, 
+which mean it is limited to only supervised type problems
+where the data structure is consistent and a clear label is provided.
+For a collaborative filtering type problem,
+the inference is often made within the data structure itself, 
+which makes a unsupervised learning problem 
+since it does not have a clear label.
+These problems would require other variations of neural networks
+with different methods for inference.
 
 \end{document}
+
+
+
+

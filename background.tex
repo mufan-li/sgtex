@@ -66,16 +66,18 @@ and the rectified linear unit (ReLU):
 \begin{equation}
 \begin{aligned}
 	g_{\text{logistic}}(z) &= \frac{1}{1+e^{-z}} \\
-	g_{\text{tanh}}(z) &= \tanh(z) = \frac{1 - e^{-2x}}{1 + e^{-2x}}\\
+	g_{\text{tanh}}(z) &= \tanh(z) = \frac{1 - e^{-2z}}{1 + e^{-2z}}\\
 	g_\text{ReLU}(z) &= \max(z,0)
 \end{aligned}
 \end{equation}
 %
-\indent 
+% \indent 
+where in the case of GLMs $z$ denotes the linear combination
+$\sum_{i=1}^N w_i x_i$.
 Notice all of these functions have simple derivatives,
 and specifically logistic and hyperbolic tangent functions 
-map to bounded ranges,
-which are great choices for classification problems.
+are monotonic and bounded by their horizontal asymptotes at infinities,
+which makes them great choices for binary classification problems.
 
 Graphically, this can be represented by a series of 
 input nodes $\{x_i\}$ connected to an output node $f$,
@@ -153,6 +155,9 @@ $w_{ij}^{(\alpha)}$ denotes the weight for the connection of
 the $i^\text{th}$ node of the $\alpha^\text{th}$ layer to 
 the $j^\text{th}$ node of the $(\alpha+1)^\text{th}$ layer,
 and $N^{(\alpha)}$ denotes the number of nodes in the $\alpha^\text{th}$ layer.
+Additionally, let $N^{(4)}$ be the number of 
+output nodes $f_l$.
+Here we also note that $N^{(1)}$ is the number of input nodes.
 
 Graphically, this structure has a very clear representation:
 %
@@ -233,24 +238,29 @@ Suppose we have a dataset $\mathcal{D} = \{\mb{x}^{[n]},
 \mb{y}^{[n]}\}, n \in \mathbb{N}$,
 and we want to find a model $f(\mb{x},\mb{w})$ such that 
 it is the ``closest'' to $\mb{y}$.
-Given a differentiable error function $E(f,\mb{y})$
-and model $f(\mb{x},\mb{w})$ with respect to $\mb{w}$,
+If the error function $E(f,\mb{y})$
+and the model $f(\mb{x},\mb{w})$ are differentiable
+with respect to $\mb{w}$,
 the model can be optimized by gradient descent.
 In other words, for any randomly initialized $\mb{w}^0$,
-an improvement can be obtained by taking a step towards 
-the direction of the gradient with respect to $\mb{w}^k$ :
+an improvement $\mb{w}^{k+1}$ can be obtained by making a 
+small modification
+in the direction of the gradient with respect to $\mb{w}^k$ :
 %
 \begin{equation}
 	\mb{w}^{k+1} = \mb{w}^{k} - \eta \; \nabla_{\mb{w}^k} 
 					E\left(f(\mb{x},\mb{w}^k),\mb{y}\right)
 \end{equation}
 %
-where $\eta$ is a constant controlling the size of 
-each optimization step, commonly called the learning rate.
+where $\eta > 0$ is hyper-parameter controlling the change of 
+each optimization iteration, commonly called the learning rate.
+Note $\eta$ is not part of the final model $f(\mb{x},\mb{w})$,
+but it will significantly influence optimization.
 
-In the the two hidden layer neural network previously,
-a derivative with respect to any $w_{ij}^{(\alpha)}$ can be found
-through chain rule of the derivatives.
+In the two hidden layer neural network previously,
+a derivative with respect to any weight 
+$w_{ij}^{(\alpha)}$ can be found
+by applying the chain rule to the derivatives.
 For example the derivative with respect to $w_{jk}^{(2)}$ :
 %
 \begin{equation}
@@ -274,13 +284,19 @@ For example the derivative with respect to $w_{jk}^{(2)}$ :
 %
 % \indent 
 Recall $g^{(\alpha)}(\cdot)$ is selected to have a simple derivative,
-making the complex appearing expression above easy to compute.
+making the complex appearing gradient term above easy to compute.
 
-A common technique to improve speed of convergence is by adding momentum.
-The idea is to let the gradient dictate the acceleration of 
-the change in $\mb{w}^k$ instead of the velocity.
-This allows the optimization to accumulate speed in the direction
-of the gradient, while making it harder to converge to a poor local minimum.
+A common technique to improve speed of convergence 
+is by adding momentum.
+Instead of letting the gradient dictate the change in $\mb{w}^k$,
+the idea is to let the gradient dictate the rate of change.
+If $\mb{w}^k$ is interpreted as a coordinate,
+and each optimization iteration as velocity,
+momentum can be seen as using the gradient as acceleration. 
+This allows the optimization to accumulate speed in 
+a consistent direction of the gradient, 
+while making it harder to slow down and 
+converge to a poor local minimum.
 The formulation starts with a velocity vector $\mb{v}^0$
 initialized to zero, and the rest in similar:
 %
@@ -292,9 +308,10 @@ initialized to zero, and the rest in similar:
 \end{aligned}
 \end{equation}
 %
-where $\theta \in [0,1]$ is the momentum constant.
+where $\theta \in [0,1]$ is the hyper-parameter 
+deciding the preservation of momentum.
 Here choosing a larger $\theta$ would result in a stronger 
-preservation of velocity vector $\mb{v}$,
+preservation of the velocity vector $\mb{v}$,
 which then improves momentum.
 
 % formatting
@@ -311,14 +328,18 @@ with each image labeled the correct digit.
 The dataset contains 60,000 images for training (fitting),
 and 10,000 images for testing.
 The images are 28x28 in resolution,
-hence making 784 dimensions in input.
+hence making $N^{(1)} = 784$ dimensions in input.
 
 The data labels are changed to use the 1-of-K encoding scheme,
 where the label $\mb{y}$ is a binary vector of size K,
-with only one element take a value of one.
+with only one element taking a value of one.
 In this case, given 10 possible digits,
-we have a vector of size 10.
-To best model this type of vector,
+we have a vector of size $N^{(4)} = 10$.
+For example, a possible scheme can label the digit ``$3$'' 
+using the vector $[0,0,1,0,\ldots]$ where 
+only the $3^\text{rd}$ index is a ``$1$''.
+
+To best model this type of label vector,
 the softmax function is chosen for the output layer:
 %
 \begin{equation}
@@ -330,24 +351,39 @@ the softmax function is chosen for the output layer:
 \indent As a result the sum of $f_l$ adds up to one,
 and the most optimal output is exactly the 1-of-K encoded label.
 If $f_l$ is modeled as the probability of the image being digit $l$,
-we can define the error function as negative log-likelihood:
+suppose the correct digit is $m$,
+then the likelihood of making the correct prediction is:
+%
+\begin{equation}
+  L(\mb{f},\mb{y}) = f_m = \prod_{l=1}^{N^{(4)}} f_l \, ^{y_l}
+\end{equation}
+%
+since $y_m = 1$ is the only non-zero term in the label vector.
+We can then define the error function as negative log-likelihood:
 %
 \begin{equation}
 % \begin{aligned}
 	E(\mb{f},\mb{y}) 
-		% &= - \log L(\mb{f},\mb{y})	\\
 		= - \log \prod_{l=1}^{N^{(4)}} f_l \, ^{y_l}
 		= - \sum_{l=1}^{N^{(4)}} y_l \log f_l
 % \end{aligned}
 \end{equation}
 %
-where minimizing $E$ is equivalent to maximizing likelihood.
+where $N^{(4)}$ is the number of output nodes, 
+and minimizing $E$ is equivalent to maximizing likelihood.
+Note taking the logarithm creates an error function with much
+simpler derivative, 
+hence simplifying the gradient descent method.
 
 In the following experiment, 
 a two hidden layer neural network is used to model the MNIST digits.
-We use 1000 nodes in each hidden layer, 
-creating a structure of 784-1000-1000-10 nodes in each layer.
-We also chose ReLU for $g(\cdot)$ in the hidden layers,
+We used $N^{(2)} = N^{(3)} = 1000$ nodes in the hidden layers, 
+creating a structure of 784-1000-1000-10 
+$\left( N^{(1)} - N^{(2)} - N^{(3)} - N^{(4)} \right)$
+nodes in each layer.
+We also chose 
+$g^{(1)}(\cdot) = g^{(2)}(\cdot) = g_\text{ReLU}(\cdot)$ 
+in the hidden layers,
 and softmax for the output layer.
 The hyper parameters were chosen as $\eta = 10^{-5}$
 and $\theta = 0.9$.
@@ -358,7 +394,7 @@ also known as a mini-batch.
 After training (optimizing) for 50 epochs,
 with each epoch denoting one complete run through of the training 
 dataset,
-we reach a test error rate of $16\%$.
+we reach a test error rate of $16\%$ (Figure \ref{fig:mnist_err}).
 %
 \begin{figure}[h]
 \centering
@@ -379,10 +415,10 @@ we reach a test error rate of $16\%$.
   classification error rate computed after each epoch.}
 \label{fig:mnist_results}
 \end{figure}
-
+%
 By increasing the number of epochs and a few small modifications,
 this model could potentially reach error rates as low as $2\%$.
-However, this will not explored since it is not
+However, this will not be explored since it is not
 the main purpose of this document,
 and optimization can be very time consuming due to computation.
 
@@ -392,7 +428,7 @@ restricted Boltzmann machine context due to an unbounded range.
 However, a recently introduced method called 
 general adversarial networks can be used instead using the ReLU functions
 in alternative to restricted Boltzmann machines.
-This will explored further in future discussions.
+This will be explored further in future discussions.
 
 Also note, this type of neural networks is feed-forward, 
 which mean it is limited to only supervised type problems

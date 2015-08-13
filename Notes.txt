@@ -2,3 +2,5 @@ Notes
 
 Add references for background
 Add background for RBM and MF
+Add sections/subsections
+	- might as well use thesis template?

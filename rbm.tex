@@ -9,7 +9,105 @@ Motivated by optimization of a more complex neural network
 and prediction of an unsupervised or semi-supervised learning problem
 such as collaborative filtering,
 it turns out that restricted Boltzmann machines can address 
-all of the problems. 
+all of these problems. 
+A RBM is a Markov random field in a bipartite graph structure,
+where there are two layers of nodes,
+no internal connections within each layer.
+One layer of nodes contain the input $\mb{x}$,
+while the other contain hidden values $\mb{h}$.
+%
+\def\layersep{2.5cm}
+\begin{figure}[h]
+\centering\begin{tikzpicture}[
+plain/.style={
+  draw=none,
+  fill=none,
+  },
+net/.style={
+  matrix of nodes,
+  nodes={
+    draw,
+    circle,
+    inner sep=10pt
+    },
+  nodes in empty cells,
+  column sep=0pt,
+  row sep=-1cm
+  },
+>=latex
+]
+
+\matrix[net] (mat)
+{
+|[plain]| \parbox{1.3cm}{\centering Hidden Nodes $h_j$} & & 
+    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| & \\
+|[plain]| \parbox{1.3cm}{\centering Weights $w_{ij}$}
+    &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
+    |[plain]| &|[plain]| &|[plain]| &|[plain]| &|[plain]| \\
+|[plain]| \parbox{1.3cm}{\centering Input Nodes $x_i$} & 
+    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
+};
+\foreach \ai [count=\mi ]in {3,5,7,9}
+  \draw[<-] (mat-3-\ai) -- node[left] {Input \mi} +(0cm,-1.3);
+\foreach \ai in {2,4,...,10}
+{\foreach \aii in {3,5,7,9}
+  \draw[-] (mat-1-\ai) -- (mat-3-\aii);
+}
+\end{tikzpicture}
+
+\caption{\label{fig:RBM}
+A restricted Boltzmann machine (RBM) with 4 input and 5 hidden nodes.
+}
+\end{figure}
+
+Suppose the graph have $N^{(1)}$ input nodes 
+and $N^{(2)}$ hidden nodes,
+with weights $w_{ij}$ defined in the same way as the neural network
+the bias parameters $w_{0j}$ and additionally $w_{i0}$.
+Here we consider the case where $h_j$ can only take binary values,
+and $\sigma_i$ as the standard deviation for each input dimension.
+Finally, we can define an energy function and 
+joint Boltzmann distribution for the graph:
+%
+\begin{equation}
+\begin{aligned}
+    E(\mb{x},\mb{h}|\theta) &= 
+        \sum_{i=1}^N \frac{(w_{i0} - x_i)^2}{2 \sigma_i}
+        - \sum_{i=1}^N \sum_{j=1}^M
+             w_{ij} h_j \frac{x_i}{\sigma_i}
+        - \sum_{i=j}^M w_{0j} h_j \\
+    P(\mb{x},\mb{h}|\theta) &= 
+        \frac{\exp\left[-E(\mb{x},\mb{h}|\theta)\right]}
+        {\mathcal{Z}}
+\end{aligned}
+\end{equation}
+%
+where $\mathcal{Z}$ is the partition function normalizing 
+the distribution.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

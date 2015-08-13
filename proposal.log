@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.11)  12 AUG 2015 00:22
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.11)  12 AUG 2015 16:24
 entering extended mode
 **C:/Users/Bill/Documents/GitHub/sgtex/proposal.tex
 (C:/Users/Bill/Documents/GitHub/sgtex/proposal.tex
@@ -584,7 +584,7 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <12> not available
 Here is how much of TeX's memory you used:
  13903 strings out of 493921
  284943 string characters out of 3147285
- 301223 words of memory out of 3000000
+ 301225 words of memory out of 3000000
  16928 multiletter control sequences out of 15000+200000
  15130 words of font info for 44 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -603,7 +603,7 @@ blic/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/c
 ourier/ucrr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb
 ><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Program File
 s/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on proposal.pdf (4 pages, 147555 bytes).
+Output written on proposal.pdf (4 pages, 147632 bytes).
 PDF statistics:
  75 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.11)  12 AUG 2015 16:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.8.11)  12 AUG 2015 19:57
 entering extended mode
 **C:/Users/Bill/Documents/GitHub/sgtex/background.tex
 (C:/Users/Bill/Documents/GitHub/sgtex/background.tex
@@ -510,7 +510,8 @@ File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
 rrows.code.tex
 File: pgflibraryarrows.code.tex 2013/09/23 v3.0.0 (rcs-revision 1.16)
 \arrowsize=\dimen175
-)) (C:\Users\Bill\Documents\GitHub\sgtex\background.aux)
+)) (C:\Users\Bill\Documents\GitHub\sgtex\background.aux
+(C:\Users\Bill\Documents\GitHub\sgtex\nnet.aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
 LaTeX Font Info:    ... okay on input line 39.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
@@ -547,94 +548,99 @@ Package caption Info: End \AtBeginDocument code.
  ABD: EveryShipout initializing macros
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
-LaTeX Font Info:    Try loading font information for U+msa on input line 54.
+ [1
+
+{C:/Users/Bill/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (C:\Users\Bi
+ll\Documents\GitHub\sgtex\nnet.tex
+LaTeX Font Info:    Try loading font information for U+msa on input line 9.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 54.
+LaTeX Font Info:    Try loading font information for U+msb on input line 9.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Overfull \hbox (2.04689pt too wide) in paragraph at lines 112--112
+Overfull \hbox (2.04689pt too wide) in paragraph at lines 67--67
  []\OT1/ptm/m/n/12 Weights 
  []
 
-[1
+[2
 
-{C:/Users/Bill/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Overfull \hbox (2.04689pt too wide) in paragraph at lines 189--189
+]
+Overfull \hbox (2.04689pt too wide) in paragraph at lines 144--144
  []\OT1/ptm/m/n/12 Weights 
  []
 
 
-Overfull \hbox (1.18454pt too wide) in paragraph at lines 192--192
+Overfull \hbox (1.18454pt too wide) in paragraph at lines 147--147
  []\OT1/ptm/m/n/12 Hidden 
  []
 
 
-Overfull \hbox (2.04689pt too wide) in paragraph at lines 194--194
+Overfull \hbox (2.04689pt too wide) in paragraph at lines 149--149
  []\OT1/ptm/m/n/12 Weights 
  []
 
 
-Overfull \hbox (1.18454pt too wide) in paragraph at lines 197--197
+Overfull \hbox (1.18454pt too wide) in paragraph at lines 152--152
  []\OT1/ptm/m/n/12 Hidden 
  []
 
 
-Overfull \hbox (2.04689pt too wide) in paragraph at lines 199--199
+Overfull \hbox (2.04689pt too wide) in paragraph at lines 154--154
  []\OT1/ptm/m/n/12 Weights 
  []
 
-[2] [3]
+[3] [4]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 321.
- <fig_mnist_nll.png, id=28, 578.16pt x 433.62pt>
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 276.
+ <fig_mnist_nll.png, id=31, 578.16pt x 433.62pt>
 File: fig_mnist_nll.png Graphic file (type png)
 
 <use fig_mnist_nll.png>
-Package pdftex.def Info: fig_mnist_nll.png used on input line 403.
+Package pdftex.def Info: fig_mnist_nll.png used on input line 358.
 (pdftex.def)             Requested size: 226.71341pt x 170.0308pt.
- <fig_mnist_err.png, id=30, 578.16pt x 433.62pt>
+ <fig_mnist_err.png, id=33, 578.16pt x 433.62pt>
 File: fig_mnist_err.png Graphic file (type png)
 
 <use fig_mnist_err.png>
-Package pdftex.def Info: fig_mnist_err.png used on input line 409.
+Package pdftex.def Info: fig_mnist_err.png used on input line 364.
 (pdftex.def)             Requested size: 226.71341pt x 170.0308pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4] [5 <C:/Users/Bill/Documents/GitHub/sgtex/fig_mnist_nll.png> <C:/Users/Bill/
-Documents/GitHub/sgtex/fig_mnist_err.png>]
-(C:\Users\Bill\Documents\GitHub\sgtex\background.aux) ) 
+) [5] [6 <C:/Users/Bill/Documents/GitHub/sgtex/fig_mnist_nll.png> <C:/Users/Bil
+l/Documents/GitHub/sgtex/fig_mnist_err.png>]
+(C:\Users\Bill\Documents\GitHub\sgtex\background.aux
+(C:\Users\Bill\Documents\GitHub\sgtex\nnet.aux)) ) 
 Here is how much of TeX's memory you used:
- 15114 strings out of 493921
- 308717 string characters out of 3147285
- 338377 words of memory out of 3000000
- 18147 multiletter control sequences out of 15000+200000
+ 15122 strings out of 493921
+ 308998 string characters out of 3147285
+ 338702 words of memory out of 3000000
+ 18148 multiletter control sequences out of 15000+200000
  18741 words of font info for 48 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 55i,17n,70p,504b,1007s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX
- 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmbx8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/sym
-bols/msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on background.pdf (5 pages, 196682 bytes).
+ 55i,17n,72p,504b,1007s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/
+fonts/enc/dvips/fontname/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmbx8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex
+10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Progra
+m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/
+msbm10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
+Output written on background.pdf (6 pages, 197156 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
+ 86 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

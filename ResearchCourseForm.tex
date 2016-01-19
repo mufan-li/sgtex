@@ -1,0 +1,151 @@
+% Borrowed from MIT 6.987 Advanced Data Structures course (Prof Demaine, 2003)
+
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath, amssymb, amsthm, bm}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,linkcolor=blue]{hyperref}
+\usepackage{hypernat}
+
+\usepackage{tikz}
+\usepackage{tkz-graph}
+
+\usepackage{listings}             % Include the listings-package
+\usepackage{algorithm2e}
+% \usepackage[sorting=none]{biblatex}
+
+\newcommand{\handout}[5]{
+  \noindent
+  \begin{center}
+  \framebox{
+    \vbox{
+      \hbox to 5.78in { {\bf STA4516: Topics in 
+        Probabilistic Programming } \hfill #2 }
+      \vspace{4mm}
+      \hbox to 5.78in { {\Large \hfill #5  \hfill} }
+      \vspace{2mm}
+      \hbox to 5.78in { {\em #3 \hfill #4} }
+    }
+  }
+  \end{center}
+  \vspace*{4mm}
+}
+
+\newcommand{\lecture}[4]{\handout{#1}{#2}{#3}{Scribe: #4}{Lecture #1}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{remark}[theorem]{Remark}
+
+% 1-inch margins, from fullpage.sty by H.Partl, Version 2, Dec. 15, 1988.
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+\textheight 8.9in
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+\textwidth 6.5in
+
+\parindent 0in
+\parskip 0ex
+%\renewcommand{\baselinestretch}{1.25}
+
+\begin{document}
+
+% \lecture{2 --- November 3, 2015}{Fall 2015}{Prof.\ Daniel M. Roy}
+% {Mufan (Bill) Li}
+
+\begin{center}
+
+\begin{LARGE}
+	\textbf{STA4000H Research Course} 
+\end{LARGE}
+
+\begin{large}
+	\textbf{Student: Mufan Li\\
+		Supervisor: Jeffery Rosenthal\\
+		Term: Winter 2016}
+\end{large}\\
+
+\end{center}
+
+\begin{Large}
+	\textbf{Coursework Description}
+\end{Large}
+% \section{Description}
+
+\paragraph{}
+Recent developments in machine learning have made significant 
+contributions to a wide range of fields that are not 
+traditionally considered data science.
+% Notably the Netflix competition have attracted a collective
+% effort in developing models that greatly improved prediction
+% of movie ratings by different users,
+% creating the best movie recommendation system at the time \cite{FeHeKh12}.
+% Similar to the Netflix rating data,
+% student grades in different courses follow the same structure,
+% allowing the application of the same machine learning techniques.
+In this research course, we intend to explore several of the 
+machine learning techniques in applications to education.
+
+\paragraph{}
+Specifically, this research project aims to apply machine learning 
+to analyze the student grade dataset from \cite{BaRoYo14},
+which contains complete transcripts of undergraduate students
+from a major Canadian University.
+Similar to predicting user ratings,
+we are able to predict the grades for courses.
+From the predictions, this project intends to analyze
+the effect of choosing easier courses on student grades,
+specifically by comparing the predicted grades of courses
+students did not take against the courses taken 
+within the same program.
+By analyzing the variation in course difficulty,
+these results could potentially improve curriculum design 
+for educational institutions and admission procedure for
+graduate programs.
+
+\paragraph{}
+The project will focus on implementing three main methods of inference:
+\vspace{-0em}
+\begin{enumerate}
+\setlength\itemsep{-0.2em}
+  \item Matrix factorization (MF) \cite{FeHeKh12} and if time permits
+  	probabilistic matrix factorization (PMF) \cite{MnSa07, SaMn08}
+  \item Restricted Boltzmann machines (RBM) \cite{Sa09}
+  \item Denoising auto-encoders (DAE) \cite{VLLBM10} and if time permits
+  	variational auto-encoders (VAE) \cite{KiWe13}
+\end{enumerate}
+
+\paragraph{}
+The student is expected to evaluate each model's performance on the dataset, 
+analyze the output results, and recommend policy changes to adjust 
+for student behaviors in choosing courses.
+The student will be graded on weekly progress ($40\%$) and a final 
+paper with source code ($60\%$).
+
+
+
+\bibliographystyle{unsrt}
+\bibliography{ResearchCourseForm}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

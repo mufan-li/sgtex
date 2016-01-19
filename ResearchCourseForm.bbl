@@ -1,0 +1,44 @@
+\begin{thebibliography}{1}
+
+\bibitem{FeHeKh12}
+Andrey Feuerverger, Yu~He, Shashi Khatri, et~al.
+\newblock Statistical significance of the netflix challenge.
+\newblock {\em Statistical Science}, 27(2):202--231, 2012.
+
+\bibitem{BaRoYo14}
+Michael~A Bailey, Jeffrey~S Rosenthal, and Albert~H Yoon.
+\newblock Grades and incentives: assessing competing grade point average
+  measures and postgraduate outcomes.
+\newblock {\em Studies in Higher Education}, (ahead-of-print):1--15, 2014.
+
+\bibitem{MnSa07}
+Andriy Mnih and Ruslan Salakhutdinov.
+\newblock Probabilistic matrix factorization.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1257--1264, 2007.
+
+\bibitem{SaMn08}
+Ruslan Salakhutdinov and Andriy Mnih.
+\newblock Bayesian probabilistic matrix factorization using markov chain monte
+  carlo.
+\newblock In {\em Proceedings of the 25th international conference on Machine
+  learning}, pages 880--887. ACM, 2008.
+
+\bibitem{Sa09}
+Ruslan Salakhutdinov.
+\newblock {\em Learning deep generative models}.
+\newblock PhD thesis, University of Toronto, 2009.
+
+\bibitem{VLLBM10}
+Pascal Vincent, Hugo Larochelle, Isabelle Lajoie, Yoshua Bengio, and
+  Pierre-Antoine Manzagol.
+\newblock Stacked denoising autoencoders: Learning useful representations in a
+  deep network with a local denoising criterion.
+\newblock {\em The Journal of Machine Learning Research}, 11:3371--3408, 2010.
+
+\bibitem{KiWe13}
+Diederik~P Kingma and Max Welling.
+\newblock Auto-encoding variational bayes.
+\newblock {\em arXiv preprint arXiv:1312.6114}, 2013.
+
+\end{thebibliography}

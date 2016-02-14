@@ -1,0 +1,10 @@
+Notes
+
+ - Consider using consistent notation for RBMs
+ 	- Consider defining notation before each figure
+ 	- Consider \theta = {W, b} notation
+ - Consider adding an example of a neural network trained to ~2% error
+ - Consider showings images examples of MNIST of RBM and DAE
+ - Consider adding matrix factorization method
+ - Consider adding an image showing the manifold learning intuition for DAE
+ - Need to add binary conditional probability for RBM

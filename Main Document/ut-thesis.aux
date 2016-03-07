@@ -9,15 +9,17 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{loa}{\addvspace {10\p@ }}
 \newlabel{sc:intro}{{1}{1}}
 \@writefile{toc}{\contentsline {paragraph}{}{1}}
 \@writefile{toc}{\contentsline {paragraph}{}{1}}
 \@writefile{toc}{\contentsline {paragraph}{}{1}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Background}{2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Supervised Learning}{2}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{ch:background}{{2}{2}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Supervised Learning Using Feedforward Neural Networks}{2}}
+\@writefile{loa}{\addvspace {10\p@ }}
+\newlabel{ch:supervised_learning}{{2}{2}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Feed-forward Neural Networks}{2}}
 \newlabel{sc:nnet}{{2.1}{2}}
 \@writefile{toc}{\contentsline {paragraph}{}{2}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces  A generalized linear model represented in graphical form. In a neural network, this is also referred to as a single neuron. \relax }}{3}}
@@ -26,43 +28,67 @@
 \citation{Bi07}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces  A generalized feed-forward neural network with two hidden layers. Bias parameters are not drawn for compactness, although they are present in all forward passing nodes. \relax }}{4}}
 \newlabel{fig:NN}{{2.2}{4}}
-\citation{Le98}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}MNIST Hand-Written Digits Example}{6}}
-\newlabel{sc:MNIST}{{2.2}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Common Techniques to Improve Training}{5}}
+\newlabel{sc:tech}{{2.2}{5}}
+\@writefile{toc}{\contentsline {paragraph}{}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Mini-Batches}{5}}
+\newlabel{subsc:mini_batches}{{2.2.1}{5}}
+\@writefile{toc}{\contentsline {paragraph}{}{5}}
+\citation{Ne13}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces The Mini-Batch Gradient Descent\relax }}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Momentum}{6}}
+\newlabel{subsc:momemtum}{{2.2.2}{6}}
 \@writefile{toc}{\contentsline {paragraph}{}{6}}
-\newlabel{fig:mnist_nll}{{2.3a}{7}}
-\newlabel{sub@fig:mnist_nll}{{a}{7}}
-\newlabel{fig:mnist_err}{{2.3b}{7}}
-\newlabel{sub@fig:mnist_err}{{b}{7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces MNIST hand-written digits modeled using a two hidden layer neural network, with negative log-likelihood and classification error rate computed after each epoch.\relax }}{7}}
-\newlabel{fig:mnist_results}{{2.3}{7}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.3}Restricted Boltzmann Machines}{8}}
-\newlabel{sc:rbm}{{2.3}{8}}
+\citation{SrHi14}
+\citation{Br01}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Dropout}{7}}
+\newlabel{subsc:dropout}{{2.2.3}{7}}
+\@writefile{toc}{\contentsline {paragraph}{}{7}}
+\citation{Le98}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}MNIST Hand-Written Digits Example}{8}}
+\newlabel{sc:MNIST}{{2.3}{8}}
 \@writefile{toc}{\contentsline {paragraph}{}{8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces  A restricted Boltzmann machine (RBM) with 4 courses and 5 hidden nodes for a specific student. \relax }}{8}}
-\newlabel{fig:RBM}{{2.4}{8}}
+\newlabel{fig:mnist_nll}{{2.3a}{9}}
+\newlabel{sub@fig:mnist_nll}{{a}{9}}
+\newlabel{fig:mnist_err}{{2.3b}{9}}
+\newlabel{sub@fig:mnist_err}{{b}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces MNIST hand-written digits modeled using a two hidden layer neural network, with negative log-likelihood and classification error rate computed after each epoch.\relax }}{9}}
+\newlabel{fig:mnist_results}{{2.3}{9}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Unsupervised Learning}{11}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{loa}{\addvspace {10\p@ }}
+\newlabel{ch:unsupervised_learning}{{3}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Restricted Boltzmann Machines}{11}}
+\newlabel{sc:rbm}{{3.1}{11}}
+\@writefile{toc}{\contentsline {paragraph}{}{11}}
 \citation{SaMnHi07}
 \citation{SaMnHi07}
 \citation{SaMnHi07}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces  A restricted Boltzmann machine (RBM) with 4 courses and 5 hidden nodes for a specific student. \relax }}{12}}
+\newlabel{fig:RBM}{{3.1}{12}}
 \citation{VLLBM10}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Denoising Autoencoders}{9}}
-\newlabel{sc:dae}{{2.4}{9}}
-\@writefile{toc}{\contentsline {paragraph}{}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Denoising Autoencoders}{13}}
+\newlabel{sc:dae}{{3.2}{13}}
+\@writefile{toc}{\contentsline {paragraph}{}{13}}
 \citation{VLLBM10}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces  An one layer autoencoder with 4 input nodes and 3 representation nodes. \relax }}{10}}
-\newlabel{fig:AE1}{{2.5}{10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces  An one layer autoencoder with 4 input nodes and 3 representation nodes. \relax }}{14}}
+\newlabel{fig:AE1}{{3.2}{14}}
 \bibstyle{plain}
 \bibdata{thesis}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces  An one layer denoising autoencoder with 4 input nodes, 3 representation nodes, and symmetric weights. In this case, we have the third input corrupted by setting to zero. \relax }}{11}}
-\newlabel{fig:DAE1}{{2.6}{11}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces  An one layer denoising autoencoder with 4 input nodes, 3 representation nodes, and symmetric weights. In this case, we have the third input corrupted by setting to zero. \relax }}{15}}
+\newlabel{fig:DAE1}{{3.3}{15}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{15}}
 \bibcite{BaRoYo14}{1}
 \bibcite{Bi07}{2}
-\bibcite{FeHeKh12}{3}
-\bibcite{KiWe13}{4}
-\bibcite{Le98}{5}
-\bibcite{MnSa07}{6}
-\bibcite{Sa09}{7}
-\bibcite{SaMn08}{8}
-\bibcite{SaMnHi07}{9}
-\bibcite{VLLBM10}{10}
+\bibcite{Br01}{3}
+\bibcite{FeHeKh12}{4}
+\bibcite{KiWe13}{5}
+\bibcite{Le98}{6}
+\bibcite{MnSa07}{7}
+\bibcite{Ne13}{8}
+\bibcite{Sa09}{9}
+\bibcite{SaMn08}{10}
+\bibcite{SaMnHi07}{11}
+\bibcite{SrHi14}{12}
+\bibcite{VLLBM10}{13}

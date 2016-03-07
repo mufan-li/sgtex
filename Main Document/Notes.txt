@@ -8,3 +8,7 @@ Notes
  - Consider adding matrix factorization method
  - Consider adding an image showing the manifold learning intuition for DAE
  - Need to add binary conditional probability for RBM
+ - Consider adding more content to fill the space created
+ 	by figures
+
+ - Add results

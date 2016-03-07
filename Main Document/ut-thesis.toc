@@ -2,13 +2,22 @@
 \contentsline {paragraph}{}{1}
 \contentsline {paragraph}{}{1}
 \contentsline {paragraph}{}{1}
-\contentsline {chapter}{\numberline {2}Background}{2}
-\contentsline {section}{\numberline {2.1}Supervised Learning Using Feedforward Neural Networks}{2}
+\contentsline {chapter}{\numberline {2}Supervised Learning}{2}
+\contentsline {section}{\numberline {2.1}Feed-forward Neural Networks}{2}
 \contentsline {paragraph}{}{2}
-\contentsline {section}{\numberline {2.2}MNIST Hand-Written Digits Example}{6}
+\contentsline {section}{\numberline {2.2}Common Techniques to Improve Training}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsection}{\numberline {2.2.1}Mini-Batches}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {subsection}{\numberline {2.2.2}Momentum}{6}
 \contentsline {paragraph}{}{6}
-\contentsline {section}{\numberline {2.3}Restricted Boltzmann Machines}{8}
+\contentsline {subsection}{\numberline {2.2.3}Dropout}{7}
+\contentsline {paragraph}{}{7}
+\contentsline {section}{\numberline {2.3}MNIST Hand-Written Digits Example}{8}
 \contentsline {paragraph}{}{8}
-\contentsline {section}{\numberline {2.4}Denoising Autoencoders}{9}
-\contentsline {paragraph}{}{9}
-\contentsline {chapter}{Bibliography}{11}
+\contentsline {chapter}{\numberline {3}Unsupervised Learning}{11}
+\contentsline {section}{\numberline {3.1}Restricted Boltzmann Machines}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {section}{\numberline {3.2}Denoising Autoencoders}{13}
+\contentsline {paragraph}{}{13}
+\contentsline {chapter}{Bibliography}{15}

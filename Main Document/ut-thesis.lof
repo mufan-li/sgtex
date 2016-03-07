@@ -2,7 +2,8 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces A generalized linear model represented in graphical form. In a neural network, this is also referred to as a single neuron. \relax }}{3}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces A generalized feed-forward neural network with two hidden layers. Bias parameters are not drawn for compactness, although they are present in all forward passing nodes. \relax }}{4}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces MNIST hand-written digits modeled using a two hidden layer neural network, with negative log-likelihood and classification error rate computed after each epoch.\relax }}{7}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces A restricted Boltzmann machine (RBM) with 4 courses and 5 hidden nodes for a specific student. \relax }}{8}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces An one layer autoencoder with 4 input nodes and 3 representation nodes. \relax }}{10}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces An one layer denoising autoencoder with 4 input nodes, 3 representation nodes, and symmetric weights. In this case, we have the third input corrupted by setting to zero. \relax }}{11}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces MNIST hand-written digits modeled using a two hidden layer neural network, with negative log-likelihood and classification error rate computed after each epoch.\relax }}{9}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces A restricted Boltzmann machine (RBM) with 4 courses and 5 hidden nodes for a specific student. \relax }}{12}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces An one layer autoencoder with 4 input nodes and 3 representation nodes. \relax }}{14}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces An one layer denoising autoencoder with 4 input nodes, 3 representation nodes, and symmetric weights. In this case, we have the third input corrupted by setting to zero. \relax }}{15}

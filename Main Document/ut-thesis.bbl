@@ -11,6 +11,11 @@ C~Bishop.
 \newblock Pattern recognition and machine learning (information science and
   statistics), 1st edn. 2006. corr. 2nd printing edn, 2007.
 
+\bibitem{Br01}
+Leo Breiman.
+\newblock Random forests.
+\newblock {\em Machine learning}, 45(1):5--32, 2001.
+
 \bibitem{FeHeKh12}
 Andrey Feuerverger, Yu~He, Shashi Khatri, et~al.
 \newblock Statistical significance of the netflix challenge.
@@ -31,6 +36,12 @@ Andriy Mnih and Ruslan Salakhutdinov.
 \newblock In {\em Advances in neural information processing systems}, pages
   1257--1264, 2007.
 
+\bibitem{Ne13}
+Yurii Nesterov.
+\newblock {\em Introductory lectures on convex optimization: A basic course},
+  volume~87.
+\newblock Springer Science \& Business Media, 2013.
+
 \bibitem{Sa09}
 Ruslan Salakhutdinov.
 \newblock {\em Learning deep generative models}.
@@ -48,6 +59,13 @@ Ruslan Salakhutdinov, Andriy Mnih, and Geoffrey Hinton.
 \newblock Restricted boltzmann machines for collaborative filtering.
 \newblock In {\em Proceedings of the 24th international conference on Machine
   learning}, pages 791--798. ACM, 2007.
+
+\bibitem{SrHi14}
+Nitish Srivastava, Geoffrey Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan
+  Salakhutdinov.
+\newblock Dropout: A simple way to prevent neural networks from overfitting.
+\newblock {\em The Journal of Machine Learning Research}, 15(1):1929--1958,
+  2014.
 
 \bibitem{VLLBM10}
 Pascal Vincent, Hugo Larochelle, Isabelle Lajoie, Yoshua Bengio, and

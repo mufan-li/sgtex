@@ -4,45 +4,45 @@ The top-level auxiliary file: ut-thesis.aux
 The style file: plain.bst
 Database file #1: thesis.bib
 Warning--there's a number but no volume in BaRoYo14
-You've used 10 entries,
+You've used 13 entries,
             2118 wiz_defined-function locations,
-            567 strings with 5750 characters,
-and the built_in function-call counts, 3542 in all, are:
-= -- 357
-> -- 158
-< -- 3
-+ -- 63
-- -- 52
-* -- 226
-:= -- 570
-add.period$ -- 30
-call.type$ -- 10
-change.case$ -- 54
+            588 strings with 6133 characters,
+and the built_in function-call counts, 4482 in all, are:
+= -- 449
+> -- 200
+< -- 4
++ -- 80
+- -- 66
+* -- 297
+:= -- 730
+add.period$ -- 39
+call.type$ -- 13
+change.case$ -- 69
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 137
-empty$ -- 281
-format.name$ -- 52
-if$ -- 759
+cite$ -- 14
+duplicate$ -- 171
+empty$ -- 356
+format.name$ -- 66
+if$ -- 949
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 7
-newline$ -- 51
-num.names$ -- 20
-pop$ -- 68
+int.to.str$ -- 13
+missing$ -- 11
+newline$ -- 66
+num.names$ -- 26
+pop$ -- 83
 preamble$ -- 1
-purify$ -- 45
+purify$ -- 58
 quote$ -- 0
-skip$ -- 110
+skip$ -- 131
 stack$ -- 0
-substring$ -- 227
-swap$ -- 42
-text.length$ -- 3
+substring$ -- 289
+swap$ -- 46
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 40
+type$ -- 50
 warning$ -- 1
-while$ -- 35
-width$ -- 12
-write$ -- 107
+while$ -- 45
+width$ -- 15
+write$ -- 140
 (There was 1 warning)

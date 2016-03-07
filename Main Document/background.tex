@@ -1,8 +1,8 @@
 % 2. Background
 
-\chapter{Background} \label{ch:background}
+\chapter{Supervised Learning} \label{ch:supervised_learning}
 
-\section{Supervised Learning Using Feedforward Neural Networks} \label{sc:nnet}
+\section{Feed-forward Neural Networks} \label{sc:nnet}
 
 \paragraph{}
 We first consider a class of machine learning algorithms
@@ -23,9 +23,10 @@ a generalized linear model (GLM),
 where the prediction is a linear combination of inputs
 but passed through a non-linear function:
 %
-\begin{equation}
-	f(\mathbf{x},\mathbf{w}) = g\left( \sum_{i=1}^{N_{in}} w_i x_i + w_0 \right)
-\end{equation}
+\begin{equation*}
+	f(\mathbf{x},\mathbf{w}) = g\left( 
+    \sum_{i=1}^{N_{in}} w_i x_i + w_0 \right)
+\end{equation*}
 %
 \indent Here $g(\cdot)$ is a non-linear function, 
 with $\mathbf{x}$ is an $N$ dimensional input vector,
@@ -36,13 +37,13 @@ for neural networks
 include the logistic (sigmoid) function, the hyperbolic tangent function, 
 and the rectified linear unit (ReLU):
 %
-\begin{equation}
+\begin{equation*}
 \begin{aligned}
 	g_{\text{logistic}}(z) &= \frac{1}{1+e^{-z}} \\
 	g_{\text{tanh}}(z) &= \tanh(z) = \frac{1 - e^{-2z}}{1 + e^{-2z}}\\
 	g_\text{ReLU}(z) &= \max(z,0)
 \end{aligned}
-\end{equation}
+\end{equation*}
 %
 % \indent 
 where $z = \left( \sum_{i=1}^N w_i x_i + w_0 \right)$ 
@@ -112,7 +113,7 @@ with different weights.
 For example, a neural network with two hidden layers
 (three layers of recursion) is defined as:
 %
-\begin{equation}
+\begin{equation*}
 \begin{aligned}
 	h^{(1)}_j &= g^{(1)}
 		\left(\sum_{i=1}^{N^{(1)}} w_{ij}^{(1)} x_i + 
@@ -124,7 +125,7 @@ For example, a neural network with two hidden layers
 		\left(\sum_{k=1}^{N^{(3)}} w_{kl}^{(3)} h_k^{(2)} + 
       w^{(3)}_{0l} \right)
 \end{aligned}
-\end{equation}
+\end{equation*}
 %
 where $g(\cdot)^{(\alpha)}$ is some activation function,
 $h^{(\alpha)}_j$ denotes the $j^\text{th}$ node of the $\alpha^\text{th}$ 
@@ -228,10 +229,10 @@ an improvement $\mathbf{w}^{k+1}$ can be obtained by making a
 small modification
 in the direction of the gradient with respect to $\mathbf{w}^k$ :
 %
-\begin{equation}
+\begin{equation*}
 	\mathbf{w}^{k+1} = \mathbf{w}^{k} - \eta \; \nabla_{\mathbf{w}^k} 
 					E\left(f(\mathbf{x},\mathbf{w}^k),\mathbf{y}\right)
-\end{equation}
+\end{equation*}
 %
 where $\eta > 0$ is hyper-parameter controlling the change of 
 each optimization iteration, commonly called the learning rate.
@@ -245,7 +246,7 @@ by applying the chain rule to the derivatives.
 For example the derivative with respect to $w_{jk}^{(2)}$ 
 where $j \neq 0$ :
 %
-\begin{equation}
+\begin{equation*}
 \begin{aligned}
 	\text{let } z_j^{(\alpha)} &= 
 		\sum_{i=1}^{N^{(\alpha)}} w_{ij}^{(\alpha)} h_i^{(\alpha-1)}
@@ -263,16 +264,102 @@ where $j \neq 0$ :
 		\frac{\de g^{(2)}(z_k^{(2)}) } {\de z_k^{(2)}}
 		h_j^{(1)} .
 \end{aligned}
-\end{equation}
+\end{equation*}
 %
 % \indent 
 Recall $g^{(\alpha)}(\cdot)$ is selected to have a simple derivative,
 making the complex appearing gradient term above easy to compute.
 
-A common technique to improve speed of convergence 
-is by adding momentum.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Common Techniques to Improve Training} \label{sc:tech}
+
+\paragraph{}
+While the setup described in the previous section
+remains valid and works for simple cases,
+several simple techniques can significantly 
+improve the speed and quality of optimizing the parameters
+in the neural network.
+It is important to note these techniques are
+also applicable in unsupervised learning techniques 
+in Section \ref{ch:unsupervised_learning}.
+
+
+
+
+
+
+
+\subsection{Mini-Batches} \label{subsc:mini_batches}
+
+\paragraph{}
+Since the computational complexity of the gradient 
+$\nabla_{\mathbf{w}^k}E$ scales linearly with the data size,
+and the data tends to be highly similar, 
+it is acceptable to approximate the gradient using 
+a small portion of the data.
+The resulting algorithm is to first divide up 
+the input data into smaller batches, 
+and then perform a gradient update for every mini-batch 
+at random order.
+
+The algorithm is summarized as follows:
+
+\begin{algorithm}[H]
+ % \KwData{this text}
+ % \KwResult{how to write algorithm with \LaTeX2e }
+ Initialize $\mathbf{w}^0, k=0$\;
+ {Partition} dataset $\mathcal{D}$ into $N$
+    mini-batches $\{\mathcal{D}_n\}_{n=1}^N$ \;
+ \Repeat{convergence}{
+  {Randomize} the order of mini-batches
+    $\{\mathcal{D}_{n'}\}_{n'=1}^N$ \;
+  \For{$n' = 1,\ldots,N$}{
+    Use
+    $\mathbf{x}_{n'}, \mathbf{y}_{n'} \in \mathcal{D}_{n'}$ \;
+    $\mathbf{w}^{k+1} = \mathbf{w}^{k} - \eta \; \nabla_{\mathbf{w}^k} 
+      E\left(f(\mathbf{x}_{n'},\mathbf{w}^k),\mathbf{y}_{n'}\right)$ \;
+    $k = k+1$ \;
+  }
+ }
+ \caption{The Mini-Batch Gradient Descent}
+\end{algorithm}
+
+Using mini-batches takes away the need to perform updates 
+after iterating through the entire dataset, 
+which significantly reduces the computational time.
+
+
+
+
+
+\subsection{Momentum} \label{subsc:momemtum}
+
+\paragraph{}
 Instead of letting the gradient dictate the change in $\mathbf{w}^k$,
-the idea is to let the gradient dictate the rate of change.
+the idea of momentum is to let the gradient dictate the rate of change.
 If $\mathbf{w}^k$ is interpreted as a coordinate,
 and each optimization iteration as velocity,
 momentum can be seen as using the gradient as acceleration
@@ -281,16 +368,32 @@ This allows the optimization to accumulate speed in
 a consistent direction of the gradient, 
 while making it harder to slow down and 
 converge to a poor local minimum.
+
+At the same time, 
+momentum also improves the speed of convergence.
+It is well known that for a convex optimization problem,
+the gradient descent method will converge at a rate 
+of $\mathcal{O}(k^{-1})$, 
+where $k$ is the number of iterations.
+The momentum technique is a special case of 
+Nesterov Acceleration \cite{Ne13},
+where the rate of convergence is 
+$\mathcal{O}(k^{-2})$ for a strongly convex 
+objective function and a Lipschitz continuous gradient.
+Since the neural network objective function is highly
+non-convex, the momentum method tends to 
+perform better in practice.
+
 The formulation starts with a velocity vector $\mathbf{v}^0$
 initialized to zero, and the rest in similar:
 %
-\begin{equation}
+\begin{equation*}
 \begin{aligned}
 	\mathbf{v}^{k+1} &= \theta \mathbf{v}^{k} - \eta \; \nabla_{\mathbf{w}^k} 
 				E\left(f(\mathbf{x},\mathbf{w}^k),\mathbf{y}\right) \\
 	\mathbf{w}^{k+1} &= \mathbf{w}^{k} + \mathbf{v}^{k+1}
 \end{aligned}
-\end{equation}
+\end{equation*}
 %
 where $\theta \in [0,1]$ is the hyper-parameter 
 deciding the preservation of momentum.
@@ -298,524 +401,81 @@ Here choosing a larger $\theta$ would result in a stronger
 preservation of the velocity vector $\mathbf{v}$,
 which then retains more momentum.
 
-% % formatting
-% \pagebreak
-% \noindent
-% \large
-% {\bf MNIST Hand-Written Digits}
-% \normalsize
 
 
 
 
 
-
-
-
-
-
-
-
-
-\section{MNIST Hand-Written Digits Example} \label{sc:MNIST}
+\subsection{Dropout} \label{subsc:dropout}
 
 \paragraph{}
-The Mixed National Institute of Standards and Technology
-(MNIST) dataset \cite{Le98} is a collection of images of hand-written digits
-from various sources,
-with each image labeled the correct digit.
-The dataset contains 60,000 images for training (fitting),
-and 10,000 images for testing.
-The images are 28x28 in resolution,
-hence making $N^{(1)} = 784$ dimensions in input.
+Another common issue for neural networks is over-fitting.
+Due to the large number of parameters, 
+a neural network can tend to ``store'' the entire dataset 
+into its parameters, 
+hence over-fitting the training dataset.
+While regularization and early stopping are used for 
+preventing this issue,
+we explore a simple yet highly effective 
+technique called dropout \cite{SrHi14}.
 
-The data labels are changed to use the 1-of-K encoding scheme,
-where the label $\mathbf{y}$ is a binary vector of size K,
-with only one element taking a value of one.
-In this case, given 10 possible digits,
-we have a vector of size $N^{(4)} = 10$.
-For example, a possible scheme can label the digit ``$3$'' 
-using the vector $[0,0,1,0,\ldots]$ where 
-only the $3^\text{rd}$ index is a ``$1$''.
+The motivation for dropout comes from ensemble methods,
+where multiple model predictions are averaged,
+with each model weighted by its posterior probability 
+given the data.
+Ensembles are highly successful when
+a large number of distinct models can be generated with 
+relative low computation.
+A notable example is random forests \cite{Br01}
+where each model is a simple decision tree.
+For neural networks, 
+the simplest method to create distinct models 
+is by considering different model architectures.
+However this is difficult to apply directly
+due to the computational cost of optimizing even 
+one neural network.
 
-To best model this type of label vector,
-the softmax function is chosen for the output layer:
+Dropout is the method that attempts to incorporate 
+random neural network architecture into 
+the same training procedure.
+The technique specifically refers to ``dropping out''
+some of the hidden units with some probability $p \in [0,1]$,
+creating a random structure for each gradient descent 
+iteration.
+
+Specifically recall the feed-forward neural network, 
+where we originally had
 %
-\begin{equation}
-	f_l = 
-	g^{(3)}(z_l^{(3)}) = \frac{\exp(z_l^{(3)})}
-		{\sum_{k=1}^{N^{(4)}} \exp(z_k^{(3)})}
-\end{equation}
+\begin{equation*}
+  h^{(2)}_k = g^{(2)}
+    \left(\sum_{j=1}^{N^{(2)}} w_{jk}^{(2)} h_j^{(1)} + 
+      w^{(2)}_{0k} \right)
+\end{equation*}
+
+Here for each gradient descent iteration,
+we introduce a list of Bernoulli random variables
+$r^{(1)}_j \sim $Bernoulli$(1-p)$,
+and modify the previous equation to
 %
-where $z^{(3)}_l = \sum_{k=1}^{N^{(3)}} w_{kl}^{(3)} h_k^{(2)} + 
-      w^{(3)}_{0l}$ 
-      is a linear combination of the final hidden layer.
-Since the denominator normalizes the sum, the $f_l$ now adds up to one,
-and a ``perfect'' output is exactly the 1-of-K encoded label.
-If $f_l$ is modeled as the probability of the image being digit $l$,
-suppose the correct digit is $m$,
-then the likelihood of making the correct prediction is:
-%
-\begin{equation}
-  L(\mathbf{f},\mathbf{y}) = f_m = \prod_{l=1}^{N^{(4)}} f_l \, ^{y_l}
-\end{equation}
-%
-since $y_m = 1$ is the only non-zero term in the label vector.
-We can then define the error function as negative log-likelihood:
-%
-\begin{equation}
-% \begin{aligned}
-	E(\mathbf{f},\mathbf{y}) 
-		= - \log \prod_{l=1}^{N^{(4)}} f_l \, ^{y_l}
-		= - \sum_{l=1}^{N^{(4)}} y_l \log f_l
-% \end{aligned}
-\end{equation}
-%
-where $N^{(4)}$ is the number of output nodes, 
-and minimizing $E$ is equivalent to maximizing likelihood.
-Note taking the logarithm creates an error function with much
-simpler derivative, 
-hence simplifying the gradient descent method.
+\begin{equation*}
+  h^{(2)}_k = g^{(2)}
+    \left(\sum_{j=1}^{N^{(2)}} w_{jk}^{(2)} 
+    h_j^{(1)} r_j^{(1)}
+     + w^{(2)}_{0k} \right)
+\end{equation*}
 
-In the following experiment, 
-a two hidden layer neural network is used to model the MNIST digits.
-We used $N^{(2)} = N^{(3)} = 1000$ nodes in the hidden layers, 
-creating a structure of 784-1000-1000-10 
-$\left( N^{(1)} - N^{(2)} - N^{(3)} - N^{(4)} \right)$
-nodes in each layer.
-We also chose 
-$g^{(1)}(\cdot) = g^{(2)}(\cdot) = g_\text{ReLU}(\cdot)$ 
-in the hidden layers,
-and softmax for the output layer.
-The hyper parameters were chosen as $\eta = 10^{-5}$
-and $\theta = 0.9$.
-We also chose to update the weight vector $\mathbf{w}^k$ once
-for every 100 samples of digits,
-also known as a mini-batch.
-
-After training (optimizing) for 50 epochs,
-with each epoch denoting one complete run through of the training 
-dataset,
-we reach a test error rate of $16\%$ (Figure \ref{fig:mnist_err}).
-%
-\begin{figure}[h]
-\centering
-\begin{subfigure}{.45\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{fig_mnist_nll.png}
-  \caption{The negative log-likelihood}
-  \label{fig:mnist_nll}
-\end{subfigure}%
-\begin{subfigure}{.45\textwidth}
-  \centering
-  \includegraphics[width=\linewidth]{fig_mnist_err.png}
-  \caption{The classification error rate}
-  \label{fig:mnist_err}
-\end{subfigure}
-\caption{MNIST hand-written digits modeled using a two hidden
-  layer neural network, with negative log-likelihood and
-  classification error rate computed after each epoch.}
-\label{fig:mnist_results}
-\end{figure}
-%
-By increasing the number of epochs and a few minor modifications,
-this model could potentially reach error rates as low as $2\%$.
-However, this will not be explored since it is not
-the main purpose of this document,
-and optimization can be very time consuming due to computation.
-
-% It is important to note that the activation function chosen is ReLU, 
-% which is not easy to incorporate due within a 
-% restricted Boltzmann machine context due to an unbounded range.
-% However, a recently introduced method called 
-% general adversarial networks can be used instead using the ReLU functions
-% in alternative to restricted Boltzmann machines.
-% This will be explored further in future discussions.
-
-While the technique is more than a sufficient solution 
-for recognizing hand-written digits,
-naively applying gradient descent to more complex 
-neural networks tend to have poor results.
-Alternative methods will be discussed in the next section 
-in order to address this problem.
-
-Also note this type of neural networks is feed-forward, 
-which mean it is limited to only supervised type problems
-where the data structure is consistent 
-and a prediction target (label) is provided for each sample.
-For a collaborative filtering type problem,
-the inference is often made within the data structure itself, 
-which makes an unsupervised learning problem.
-Feed-forward neural networks also fail to fully utilize 
-the datasets that are partly labeled, 
-known as semi-supervised problems.
-These problems would require other variations of neural networks
-with different methods for inference.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Restricted Boltzmann Machines} \label{sc:rbm}
-
-\paragraph{}
-On the other hand, restricted Boltzmann machines (RBM) is a
-completely different approach to problems without labels.
-RBM is a type of unsupervised learning algorithm, 
-for there are no labels to ``supervise'' the learning.
-The purpose of unsupervised algorithms are to find
-structural patterns within the data itself.
-In this case, we are interested in the relationships 
-between the performance in difference courses,
-and how this helps us predict the grades.
-
-A RBM is a Markov random field in the form of a bipartite graph,
-where the joint probability follows a Boltzmann type distribution.
-The bipartite graph structure creates two layers without
-internal connections.
-One layer, called the visible layer, contain the input data; 
-in this case, the visible values are the grades of each student.
-These nodes are connected to the other layer, called the hidden layer,
-with symmetrical weighted connections.
-%
-\def\layersep{2.5cm}
-\begin{figure}[h]
-\centering\begin{tikzpicture}[
-plain/.style={
-  draw=none,
-  fill=none,
-  },
-net/.style={
-  matrix of nodes,
-  nodes={
-    draw,
-    circle,
-    inner sep=10pt
-    },
-  nodes in empty cells,
-  column sep=0pt,
-  row sep=-1cm
-  },
->=latex
-]
-
-\matrix[net] (mat)
-{
-|[plain]| \parbox{1.3cm}{\centering Hidden Nodes $h_j$} & & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| & \\
-|[plain]| \parbox{1.3cm}{\centering Weights $w_{ij}$}
-    &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
-    |[plain]| &|[plain]| &|[plain]| &|[plain]| &|[plain]| \\
-|[plain]| \parbox{1.3cm}{\centering Visible Nodes $v_i$} & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
-};
-\foreach \ai [count=\mi ]in {3,5,7,9}
-  \draw[<-] (mat-3-\ai) -- node[left] {Grade \mi} +(0cm,-1.3);
-\foreach \ai in {2,4,...,10}
-{\foreach \aii in {3,5,7,9}
-  \draw[-] (mat-1-\ai) -- (mat-3-\aii);
-}
-\end{tikzpicture}
-
-\caption{\label{fig:RBM}
-A restricted Boltzmann machine (RBM) with 4 courses and 5 hidden
-nodes for a specific student.
-}
-\end{figure}
-
-Suppose the graph have $N$ visible nodes and $M$ hidden nodes,
-with each visible node denoted $v_i$, hidden nodes denoted $h_j$, 
-weights between two nodes $w_{ij}$,
-$b_i$ and $a_j$ be bias parameters,
-and $\sigma_i$ be the standard deviation of grades for each course.
-Here each visible node $v_i$ represents the grade for course $i$,
-where a specific student is fixed.
-Let $\theta = \{ w_{ij},a_j,b_i,\sigma_i \} \; \forall i,j$,
-$\mathbf{v} = \{v_i\} \; \forall i$,
-and $\mathbf{h} = \{h_j\} \; \forall j$ denote the collections.
-Additionally, we let the hidden nodes only take on binary values, 
-i.e. $v_i \in \mathbb{R}, h_j \in \{0,1\}$.
-We can then define the energy function and 
-the joint distribution for the graph:
-%
-\begin{equation}
-\begin{aligned}
-    E(\mathbf{v},\mathbf{h}|\theta) &= 
-        \displaystyle\sum_{i=1}^N \frac{(b_i - v_i)^2}{2 \sigma_i}
-        - \displaystyle\sum_{i=1}^N \displaystyle\sum_{j=1}^M
-             w_{ij} h_j \frac{v_i}{\sigma_i}
-        - \displaystyle\sum_{i=j}^M a_j h_j \\
-% \end{equation}
-%
-% The joint distribution for the graph is then defined
-% by the Boltzmann distribution:
-%
-% \begin{equation}
-    P(\mathbf{v},\mathbf{h}|\theta) &= 
-        \frac{\exp\left[-E(\mathbf{v},\mathbf{h}|\theta)\right]}
-        {\mathcal{Z}}
-\end{aligned}
-\end{equation}
-%
-where $\mathcal{Z}$ is the partition function normalizing
-the distribution.
-After marginalizing over the hidden nodes $\mathbf{h}$, 
-we can find the gradient of the likelihood function
-with respect to the parameters $\theta$
-to perform steepest descent optimization.
-Finding the gradient requires the use of Gibbs sampling,
-although \cite{SaMnHi07} showed the approximate gradient
-after very few iterations of Gibbs sampling is sufficient 
-for optimization.
-
-\begin{equation}
-    \frac{\de P(\mathbf{v}|\theta)}{\de w_{ij}} = 
-        \mathbf{E}_{\text{data}} (v_i h_j) -
-        \mathbf{E}_{\text{model}} (v_i h_j)
-\end{equation}
-
-where $\mathbf{E}_{\text{data}}$ refers to expectation 
-of observing the case within data,
-and $\mathbf{E}_{\text{model}}$ is the expectation of 
-the current model with parameters $\theta$.
-Instead of using Gibbs sampling until convergence to find 
-$\mathbf{E}_{\text{model}}$, 
-\cite{SaMnHi07} uses $k$ iterations for a very good approximation
-of the gradient.
-This method is referred to contrastive divergence (CD) by the 
-authors in \cite{SaMnHi07}, where CD-$k$ refers to $k$ iterations
-used in Gibbs sampling.
-As a result, we have a very good algorithm optimize the
-RBM for likelihood.
-
-To perform inference on a missing grade value,
-one simply include an additional ``visible'' node $v_p$,
-where the value is not known, 
-but can be determined by the energy function:
-%
-\begin{equation}
-\begin{aligned}
-    P(v_p|\mathbf{v}) &\propto
-        \displaystyle\sum_{\mathbf{h}} 
-        \exp[-E(v_p,\mathbf{v},\mathbf{h})] \\
-    &= \prod_{j=1}^M \left( 1 + 
-        \exp\left[\sum_{i=1}^N w_{ij} v_i\right]
-        \right)
-\end{aligned}
-\end{equation}
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Denoising Autoencoders} \label{sc:dae}
-
-\paragraph{}
-Another approach to unsupervised learning is using autoencoders (AEs), 
-specifically in this case we will introduce the 
-denoising autoencoders (DAEs) in \cite{VLLBM10}.
-The autoencoder is a compression model of input data, 
-such that a high dimensional input can be encoded as 
-a low dimensional representation,
-where the data can be reconstructed from the representation 
-using a decoder.
-
-For this problem we consider a dataset 
-$\mathcal{D} = \{\mathbf{x}^{[n]}\}, 
-\mathbf{x}^{[n]} \in \mathbb{R}^{N_{in}},
-n \in \mathbb{N}$,
-with only $\mathbf{x}$ as the input.
-We also define a desired feature $\mathbf{h} \in \mathbb{R}^{N_{feat}} $
-with $N_{feat} < N_{in}$,
-and an encoder-decoder pair 
-$f(\mathbf{x},\mathbf{w}^{(1)}), g(\mathbf{h},\mathbf{w}^{(2)})$
-such that the reconstruction 
-$\hat{\mathbf{x}} = g \circ f(\mathbf{x}) \approx \mathbf{x}$.
-This results in a forced compression of input $\mathbf{x}$ 
-into lower dimensional $\mathbf{h}$,
-and in the process, the parameterization $\mathbf{w}$ retains 
-further information about the data structure.
-
-\def\layersep{2.5cm}
-\begin{figure}[h]
-\centering\begin{tikzpicture}[
-plain/.style={
-  draw=none,
-  fill=none,
-  },
-net/.style={
-  matrix of nodes,
-  nodes={
-    draw,
-    circle,
-    inner sep=10pt
-    },
-  nodes in empty cells,
-  column sep=0pt,
-  row sep=-1cm
-  },
->=latex
-]
-
-\matrix[net] (mat)
-{
-|[plain]| \parbox{1.3cm}{\centering Reconstruction\\$\hat{x}_l$} & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
-% |[plain]| \parbox{1.3cm}{\centering Weights \\$w_{kl}^{(3)}$}\\
-%     % &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
-%     % |[plain]| &|[plain]| &|[plain]| &|[plain]| &|[plain]| \\
-% |[plain]| \parbox{1.2cm}{\centering Hidden\\$h_k^{(2)}$} & & 
-%     |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| & \\
-|[plain]| \parbox{1.3cm}{\centering Weights \\$w_{jl}^{(2)}$}
-    &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
-    |[plain]| &|[plain]| &|[plain]| &|[plain]| &|[plain]| \\
-|[plain]| \parbox{1.2cm}{\centering Representation\\$h_j^{(1)}$} & |[plain]| & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| & |[plain]| \\
-|[plain]| \parbox{1.3cm}{\centering Weights \\$w_{ij}^{(1)}$}
-    &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
-    |[plain]| &|[plain]| &|[plain]| &|[plain]| &|[plain]| \\
-|[plain]| \parbox{1.3cm}{\centering Input\\$x_i$} & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
-};
-\foreach \ai [count=\mi ]in {3,5,7,9}
-  \draw[<-] (mat-5-\ai) -- node[left] {Input $x_\text{\mi}$} +(0cm,-1.3);
-\foreach \ai in {3,5,7,9}
-{\foreach \aii in {4,6,8}
-  \draw[<-] (mat-1-\ai) -- (mat-3-\aii);
-}
-\foreach \ai in {4,6,8}
-{\foreach \aii in {3,5,7,9}
-  \draw[<-] (mat-3-\ai) -- (mat-5-\aii);
-}
-\end{tikzpicture}
-
-\caption{\label{fig:AE1}
-An one layer autoencoder with 4 input nodes and 3 representation nodes.
-}
-\end{figure}
-
-With this setup, we have a neural network described as in Figure \ref{fig:AE1}.
-In this structure, we can optimize for the optimal parameters 
-$\{\mathbf{w}^{(1)}, \mathbf{w}^{(2)}\}$ using the gradient descent approach
-from feedforward neural networks \ref{sc:nnet}. 
-In practice, tied weights condition
-$\mathbf{w}^{(1)} = [\mathbf{w}^{(2)}]^\top$ 
-is often enforced to start the optimization.
-Observe that when the weights are tied and 
-the non-linear activation function is sigmoid, 
-we have a striking similarity with the RBM:
-the representation $\mathbf{h}$ is exactly 
-the probability of binary hidden layer sampled as 1.
-
-However as \cite{VLLBM10} explained, 
-pure compression retains insufficient information,
-especially when compared to RBMs;
-therefore the authors introduced a new optimization criterion:
-reconstruction from noisy inputs.
-Formally, we have a corruption function $q$ 
-that creates noisy inputs $\mathbf{v} = q(\mathbf{x})$.
-A popular choice of $q$ is to randomly 
-set a fraction of the input dimensions to zero.
-
-To motivate denoising autoencoders, 
-we consider an example with 2 inputs, i.e. $\mathbf{x} = \{x_1, x_2\}$,
-and let $x_1 \approx \phi(x_2)$ for some bijection $\phi$.
-When $x_1$ is set to zero due to corruption, 
-it remains possible to reconstruct $x_1$ by 
-learning the relationship between $x_1$ and $x_2$,
-which gives us $\hat{x}_1 = \phi(x_2)$.
-Similarly, when $x_2$ is corrupted, ideally we can have 
-$\hat{x}_2 = \phi^{-1}(x_1)$.
-
-
-\def\layersep{2.5cm}
-\begin{figure}[h]
-\centering\begin{tikzpicture}[
-plain/.style={
-  draw=none,
-  fill=none,
-  },
-net/.style={
-  matrix of nodes,
-  nodes={
-    draw,
-    circle,
-    inner sep=10pt
-    },
-  nodes in empty cells,
-  column sep=0pt,
-  row sep=-1cm
-  },
->=latex
-]
-
-\matrix[net] (mat)
-{
-|[plain]| \parbox{1.3cm}{\centering Reconstruction\\$\hat{x}_l$} & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
-|[plain]| \parbox{1.3cm}{\centering Weights \\$w_{jl}^{(2)}$}
-    &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
-    |[plain]| &|[plain]| &|[plain]| &|[plain]| &|[plain]| \\
-|[plain]| \parbox{1.3cm}{\centering Representation\\$h_j^{(1)}$} & |[plain]| & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| & |[plain]| \\
-|[plain]| \parbox{1.3cm}{\centering Weights \\$w_{ij}^{(1)}$}
-    &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
-    |[plain]| &|[plain]| &|[plain]| &|[plain]| &|[plain]| \\
-|[plain]| \parbox{1.3cm}{\centering Noisy Input\\$q(x_i)$} & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
-|[plain]| \parbox{1.3cm}{\centering Corruption \\$q(\cdot)$}
-    &|[plain]| &|[plain]| &|[plain]| &|[plain]| &
-    |[plain]| & |[plain]| $q(x_3)=0$ &|[plain]| &|[plain]| &|[plain]| \\
-|[plain]| \parbox{1.3cm}{\centering Input\\$x_i$} & 
-    |[plain]| & & |[plain]| & & |[plain]| & & |[plain]| &\\
-};
-\foreach \ai [count=\mi ]in {3,5,7,9}
-  \draw[<-] (mat-7-\ai) -- node[left] {Input $x_\text{\mi}$} +(0cm,-1.3);
-\foreach \ai in {3,5,7,9}
-  \draw[<-] (mat-5-\ai) -- (mat-7-\ai);
-% \draw[<-] (mat-5-7) -- node[left] {$q(x_3) = 0$} +(0cm,-2.8cm);
-\foreach \ai in {3,5,7,9}
-{\foreach \aii in {4,6,8}
-  \draw[<-] (mat-1-\ai) -- (mat-3-\aii);
-}
-\foreach \ai in {4,6,8}
-{\foreach \aii in {3,5,7,9}
-  \draw[<-] (mat-3-\ai) -- (mat-5-\aii);
-}
-\end{tikzpicture}
-
-\caption{\label{fig:DAE1}
-An one layer denoising autoencoder with 4 input nodes, 3 representation nodes,
-and symmetric weights. In this case, we have the third input corrupted
-by setting to zero.
-}
-\end{figure}
-
-
-
-
-
-
-
+Observe that with probability $p$, 
+each hidden node $h_j^{(1)}$ will be set to zero,
+hence creating a random structure.
+We also observe that since if the node $h_j^{(1)}$
+is dropped, we have that the parameter 
+$w_{jk}^{(2)}$ stays unchanged for this iteration,
+since the hidden node $h_j^{(1)}$ does not 
+affect the objective function for this iteration.
+Similarly, all the parameters 
+$w_{ij}^{(1)},\forall i$ intended for 
+the nodes leading up to $h_j^{(1)}$ 
+remain unchanged as well.
 
 
 

@@ -171,15 +171,20 @@
 
 %% This generates the abstract page, with the line spacing adjusted
 %% according to SGS guidelines.
-\begin{abstract}
-%% *** Put your Abstract here. ***
-%% (At most 150 words for M.Sc. or 350 words for Ph.D.)
-This is my abstract.
+% \begin{abstract}
+% %% *** Put your Abstract here. ***
+% %% (At most 150 words for M.Sc. or 350 words for Ph.D.)
+% This research project applied machine learning 
+% to analyze the student grade dataset from \cite{BaRoYo14},
+% which contains complete transcripts of undergraduate students
+% from a major Canadian University.
+% Specifically, neural network methods 
+% are used to predict student selections of courses and 
+% majors, as well as the grade performance in 
+% future courses.
+% % \input{abstract}
 
-Up to 250 words, single-spaced in block form in centre of separate page.
-% \input{abstract}
-
-\end{abstract}
+% \end{abstract}
 
 %% Anything placed between the abstract and table of contents will
 %% appear on a separate page since the abstract ends with \newpage and
@@ -197,13 +202,19 @@ Up to 250 words, single-spaced in block form in centre of separate page.
 %% pages so if you want the two sections to appear on separate pages,
 %% you should put an explicit \newpage between them.
 
-\newpage
+% \newpage
 %% This generates an "acknowledgements" section, if needed
 %% (uncomment to have it appear in the document).
-\begin{acknowledgements}
-%% *** Put your Acknowledgements here. ***
-Put your Acknowledgements here.
-\end{acknowledgements}
+% \begin{acknowledgements}
+% %% *** Put your Acknowledgements here. ***
+% I have to thank my advisor Professor Jeffrey Rosenthal and 
+% Professor Albert Hyoon,
+% without their careful guidance this research project would not have been possible.
+% Under Professor Christara's supervision,
+% this research project has been an amazing learning experience.
+% I would like to thank you very much for your support and teaching over the 
+% past year.
+% \end{acknowledgements}
 
 %% This generates the Table of Contents (on a separate page).
 \tableofcontents
@@ -243,8 +254,7 @@ Put your Acknowledgements here.
 \input{background}
 \input{background_mnist}
 \input{background_unsup}
-% \input{method}
-% \input{results}
+\input{results}
 % \input{conclusion}
 
 %% This adds a line for the Bibliography in the Table of Contents.

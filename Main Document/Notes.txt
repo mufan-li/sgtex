@@ -12,3 +12,5 @@ Notes
  	by figures
 
  - Add results
+
+ - Add batch normalization

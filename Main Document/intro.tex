@@ -6,23 +6,26 @@
 Recent developments in machine learning have made significant 
 contributions to a wide range of fields that are not 
 traditionally considered data science.
-% Notably the Netflix competition have attracted a collective
-% effort in developing models that greatly improved prediction
-% of movie ratings by different users,
-% creating the best movie recommendation system at the time \cite{FeHeKh12}.
-% Similar to the Netflix rating data,
-% student grades in different courses follow the same structure,
-% allowing the application of the same machine learning techniques.
+Notably the Netflix competition have attracted a collective
+effort in developing models that greatly improved prediction
+of movie ratings by different users,
+creating the best movie recommendation system at the time \cite{FeHeKh12}.
+Similar to the Netflix rating data,
+student grades in different courses follow the same structure,
+allowing the application of the same machine learning techniques.
 In this research course, we intend to explore several of the 
 machine learning techniques in applications to education.
 
-\paragraph{}
+% \paragraph{}
 Specifically, this research project aims to apply machine learning 
 to analyze the student grade dataset from \cite{BaRoYo14},
 which contains complete transcripts of undergraduate students
 from a major Canadian University.
 Similar to predicting user ratings,
 we are able to predict the grades for courses.
+At the same time,
+we also will predict student's course and major 
+selection choices.
 From the predictions, this project intends to analyze
 the effect of choosing easier courses on student grades,
 specifically by comparing the predicted grades of courses
@@ -33,16 +36,26 @@ these results could potentially improve curriculum design
 for educational institutions and admission procedure for
 graduate programs.
 
-\paragraph{}
-The project will focus on implementing three main methods of inference:
-\vspace{-0em}
-\begin{enumerate}
-\setlength\itemsep{-0.2em}
-  \item Matrix factorization (MF) \cite{FeHeKh12} and if time permits
-  	probabilistic matrix factorization (PMF) \cite{MnSa07, SaMn08}
-  \item Restricted Boltzmann machines (RBM) \cite{Sa09}
-  \item Denoising auto-encoders (DAE) \cite{VLLBM10} and if time permits
-  	variational auto-encoders (VAE) \cite{KiWe13}
-\end{enumerate}
+This research report will be organized as follow.
+Chapter 2 will introduce feed-forward neural networks
+in detail, including several techniques that 
+can significantly improve training results,
+as well as an example case using hand-written digits.
+Chapter 3 will introduce two unsupervised learning 
+algorithms that can be used to for a different purpose.
+Chapter 4 will describe the experiments and 
+the results we achieved using the student grade dataset.
+
+% \paragraph{}
+% The project will focus on implementing three main methods of inference:
+% \vspace{-0em}
+% \begin{enumerate}
+% \setlength\itemsep{-0.2em}
+%   \item Matrix factorization (MF) \cite{FeHeKh12} and if time permits
+%   	probabilistic matrix factorization (PMF) \cite{MnSa07, SaMn08}
+%   \item Restricted Boltzmann machines (RBM) \cite{Sa09}
+%   \item Denoising auto-encoders (DAE) \cite{VLLBM10} and if time permits
+%   	variational auto-encoders (VAE) \cite{KiWe13}
+% \end{enumerate}
 
 

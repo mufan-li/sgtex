@@ -1,3 +1,8 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces MNIST hand-written digits test results with different neural networks.\relax }}{12}
 \addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Prediction of student majors test results with different neural networks.\relax }}{19}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Prediction of student course selection test results with different neural networks.\relax }}{20}
+\contentsline {table}{\numberline {4.3}{\ignorespaces Prediction of student course grade test results with different neural networks.\relax }}{21}

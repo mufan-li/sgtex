@@ -1,7 +1,5 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {paragraph}{}{1}
-\contentsline {paragraph}{}{1}
-\contentsline {paragraph}{}{1}
 \contentsline {chapter}{\numberline {2}Supervised Learning}{2}
 \contentsline {section}{\numberline {2.1}Feed-forward Neural Networks}{2}
 \contentsline {paragraph}{}{2}
@@ -9,15 +7,24 @@
 \contentsline {paragraph}{}{5}
 \contentsline {subsection}{\numberline {2.2.1}Mini-Batches}{5}
 \contentsline {paragraph}{}{5}
-\contentsline {subsection}{\numberline {2.2.2}Momentum}{6}
+\contentsline {subsection}{\numberline {2.2.2}Momentum and Adam}{6}
 \contentsline {paragraph}{}{6}
 \contentsline {subsection}{\numberline {2.2.3}Dropout}{7}
 \contentsline {paragraph}{}{7}
-\contentsline {section}{\numberline {2.3}MNIST Hand-Written Digits Example}{8}
-\contentsline {paragraph}{}{8}
-\contentsline {chapter}{\numberline {3}Unsupervised Learning}{11}
-\contentsline {section}{\numberline {3.1}Restricted Boltzmann Machines}{11}
-\contentsline {paragraph}{}{11}
-\contentsline {section}{\numberline {3.2}Denoising Autoencoders}{13}
+\contentsline {subsection}{\numberline {2.2.4}Batch Normalization}{9}
+\contentsline {paragraph}{}{9}
+\contentsline {section}{\numberline {2.3}MNIST Hand-Written Digits Example}{10}
+\contentsline {paragraph}{}{10}
+\contentsline {chapter}{\numberline {3}Unsupervised Learning}{13}
+\contentsline {section}{\numberline {3.1}Restricted Boltzmann Machines}{13}
 \contentsline {paragraph}{}{13}
-\contentsline {chapter}{Bibliography}{15}
+\contentsline {section}{\numberline {3.2}Denoising Autoencoders}{15}
+\contentsline {paragraph}{}{15}
+\contentsline {chapter}{\numberline {4}Experiment Results}{18}
+\contentsline {section}{\numberline {4.1}Classification of Student Majors}{18}
+\contentsline {paragraph}{}{18}
+\contentsline {section}{\numberline {4.2}Prediction of Course Selection}{20}
+\contentsline {paragraph}{}{20}
+\contentsline {section}{\numberline {4.3}Prediction of Student Grades}{21}
+\contentsline {paragraph}{}{21}
+\contentsline {chapter}{Bibliography}{21}

@@ -16,10 +16,31 @@ Leo Breiman.
 \newblock Random forests.
 \newblock {\em Machine learning}, 45(1):5--32, 2001.
 
+\bibitem{DaLa12}
+Andreas~C Damianou and Neil~D Lawrence.
+\newblock Deep gaussian processes.
+\newblock {\em arXiv preprint arXiv:1211.0358}, 2012.
+
 \bibitem{FeHeKh12}
 Andrey Feuerverger, Yu~He, Shashi Khatri, et~al.
 \newblock Statistical significance of the netflix challenge.
 \newblock {\em Statistical Science}, 27(2):202--231, 2012.
+
+\bibitem{GaGh15}
+Yarin Gal and Zoubin Ghahramani.
+\newblock Dropout as a bayesian approximation: Appendix.
+\newblock {\em arXiv preprint arXiv:1506.02157}, 2015.
+
+\bibitem{IoSz15}
+Sergey Ioffe and Christian Szegedy.
+\newblock Batch normalization: Accelerating deep network training by reducing
+  internal covariate shift.
+\newblock {\em arXiv preprint arXiv:1502.03167}, 2015.
+
+\bibitem{KiBa14}
+Diederik Kingma and Jimmy Ba.
+\newblock Adam: A method for stochastic optimization.
+\newblock {\em arXiv preprint arXiv:1412.6980}, 2014.
 
 \bibitem{KiWe13}
 Diederik~P Kingma and Max Welling.

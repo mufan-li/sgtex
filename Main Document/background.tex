@@ -10,7 +10,8 @@ called supervised learning.
 In this case we have a dataset $\mathcal{D} = \{\mathbf{x}^{[n]}, 
 \mathbf{y}^{[n]}\}, \mathbf{x}^{[n]} \in \mathbb{R}^{N_{in}}, 
 \mathbf{y}^{[n]} \in \mathbb{R}^{N_{out}}, n \in \mathbb{N}$,
-with $\mathbf{x}$ as the input, and $\mathbf{y}$ as the label or output.
+with $\mathbf{x}$ as the input, and $\mathbf{y}$ as the label 
+or output.
 We want to find a model 
 $f(\mathbf{x},\mathbf{w})$ such that 
 it is the ``closest'' to $\mathbf{y}$, 
@@ -355,7 +356,7 @@ which significantly reduces the computational time.
 
 
 
-\subsection{Momentum} \label{subsc:momemtum}
+\subsection{Momentum and Adam} \label{subsc:momemtum}
 
 \paragraph{}
 Instead of letting the gradient dictate the change in $\mathbf{w}^k$,
@@ -401,6 +402,62 @@ Here choosing a larger $\theta$ would result in a stronger
 preservation of the velocity vector $\mathbf{v}$,
 which then retains more momentum.
 
+Recently, many new algorithms are developed 
+for adaptively adjusting the gradient and momentum.
+Here we highlight one specific algorithm called 
+Adam \cite{KiBa14}, where the authors here
+choose to work with an exponential moving average
+of the gradient and its second moment.
+In this case, a momentum-like result is achieved 
+with the moving average, 
+and the direction of the gradient is scaled 
+by the curvature as well.
+
+To specific the algorithm we require
+a learning rate $\eta$,
+exponential moving average decay parameters
+$\beta_1,\beta_2$,
+and lower bound on second moment $\epsilon$.
+Here we denote $(\mathbf{g}^k)^2 = \mathbf{g}^k \odot \mathbf{g}^k$
+as the element wise square,
+and $\beta_1^k = (\beta_1)^k$
+as the $k^\text{th}$ power.
+The Adam algorithm then follows
+
+\begin{algorithm}[H]
+ % \KwData{this text}
+ % \KwResult{how to write algorithm with \LaTeX2e }
+ Initialize $\mathbf{w}^0, k=0, \mathbf{m}^0 = 0,
+ \mathbf{v}^0 = 0$\;
+ \Repeat{convergence}{
+  Use
+  $\mathbf{x}, \mathbf{y} \in \mathcal{D}$ \;
+  Compute gradient \\
+  $\mathbf{g}^{k+1} = \nabla_{\mathbf{w}^k} 
+    E\left(f(\mathbf{x},\mathbf{w}^k),\mathbf{y}\right)$ \;
+  Compute the first and second moment exponential 
+  moving average \\
+  $\mathbf{m}^{k+1} = \beta_1 \mathbf{m}^k + 
+    (1-\beta_1) \mathbf{g}^{k+1}$ \;
+  $\mathbf{v}^{k+1} = \beta_2 \mathbf{v}^k + 
+    (1-\beta_2) (\mathbf{g}^{k+1})^2$ \;
+  Correct for bias \\
+  $\hat{\mathbf{m}}^{k+1} = \mathbf{m}^{k+1} / (1-\beta_1^k)$ \;
+  $\hat{\mathbf{v}}^{k+1} = \mathbf{v}^{k+1} / (1-\beta_2^k)$ \;
+  Update parameters \\
+  $\mathbf{w}^{k+1} = \mathbf{w}^{k} - \eta \;
+  \hat{\mathbf{m}}^{k+1} \big/ 
+  \left(\sqrt{\hat{\mathbf{v}}^{k+1}} + \epsilon\right)$ \;
+  $k = k+1$ \;
+ }
+ \caption{Adam Algorithm}
+\end{algorithm}
+
+Observe when $\mathbf{g}^k$ is consistently small,
+we would have a small $\mathbb{m}^k$,
+however it will be divided by a small $\mathbb{v}^k$ as well,
+adjusting for slow down in convergence.
+
 
 
 
@@ -434,6 +491,12 @@ is by considering different model architectures.
 However this is difficult to apply directly
 due to the computational cost of optimizing even 
 one neural network.
+More recently, authors in \cite{GaGh15} showed 
+that dropout objective is minimizing the
+Kullback-Leibler divergence between an approximate 
+model and a deep Gaussian process model in \cite{DaLa12}. 
+Mathematically, this explains how dropout
+can avoid model over-fitting.
 
 Dropout is the method that attempts to incorporate 
 random neural network architecture into 
@@ -447,35 +510,119 @@ Specifically recall the feed-forward neural network,
 where we originally had
 %
 \begin{equation*}
-  h^{(2)}_k = g^{(2)}
-    \left(\sum_{j=1}^{N^{(2)}} w_{jk}^{(2)} h_j^{(1)} + 
-      w^{(2)}_{0k} \right)
+  h^{(\alpha)}_k = g^{(\alpha)}
+    \left(\sum_{j=1}^{N^{(\alpha)}} w_{jk}^{(\alpha)} 
+    h_j^{(\alpha-1)} + w^{(\alpha)}_{0k} \right)
 \end{equation*}
 
 Here for each gradient descent iteration,
 we introduce a list of Bernoulli random variables
-$r^{(1)}_j \sim $Bernoulli$(1-p)$,
+$r^{(\alpha-1)}_j \sim $Bernoulli$(1-p)$,
 and modify the previous equation to
 %
 \begin{equation*}
-  h^{(2)}_k = g^{(2)}
-    \left(\sum_{j=1}^{N^{(2)}} w_{jk}^{(2)} 
-    h_j^{(1)} r_j^{(1)}
-     + w^{(2)}_{0k} \right)
+  h^{(\alpha)}_k = g^{(\alpha)}
+    \left(\sum_{j=1}^{N^{(\alpha)}} w_{jk}^{(\alpha)} 
+    h_j^{(\alpha-1)} r_j^{(\alpha-1)}
+     + w^{(\alpha)}_{0k} \right)
 \end{equation*}
 
 Observe that with probability $p$, 
-each hidden node $h_j^{(1)}$ will be set to zero,
+each hidden node $h_j^{(\alpha-1)}$ will be set to zero,
 hence creating a random structure.
-We also observe that since if the node $h_j^{(1)}$
+We also observe that since if the node $h_j^{(\alpha-1)}$
 is dropped, we have that the parameter 
-$w_{jk}^{(2)}$ stays unchanged for this iteration,
-since the hidden node $h_j^{(1)}$ does not 
+$w_{jk}^{(\alpha)}$ stays unchanged for this iteration,
+since the hidden node $h_j^{(\alpha-1)}$ does not 
 affect the objective function for this iteration.
 Similarly, all the parameters 
-$w_{ij}^{(1)},\forall i$ intended for 
-the nodes leading up to $h_j^{(1)}$ 
+$w_{ij}^{(\alpha-1)},\forall i$ intended for 
+the nodes leading up to $h_j^{(\alpha-1)}$ 
 remain unchanged as well.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Batch Normalization} \label{subsc:batch_norm}
+
+\paragraph{}
+Finally, a significant hurdle in training neural networks 
+is the constantly changing distribution of each layer's
+input during training, 
+as the parameters of the previous layer changes.
+This results in the gradient descent method struggling 
+to optimize each layer at the same rate.
+Previously, most optimization is done by 
+manually tuning the learning rate separately 
+for each layer, which is notoriously difficult.
+Authors in \cite{IoSz15} propose a simple 
+adjustment to resolve the issue, 
+namely batch normalization.
+The idea is to normalize each layer's input 
+to have a standard mean and variance before activation,
+controlling the distribution of different layers.
+
+Consider our feed-forward activation as before
+%
+\begin{equation*}
+\begin{aligned}
+  z^{(\alpha)}_k &= \sum_{j=1}^{N^{(\alpha)}} w_{jk}^{(\alpha-1)} 
+    h_j^{(\alpha-1)} r_j^{(\alpha-1)}
+     + w^{(\alpha)}_{0k} \\
+   h^{(\alpha)}_k &= g^{(\alpha)}
+    \left(z^{(\alpha)}_k \right)
+\end{aligned}
+\end{equation*}
+
+Now instead of using $z^{(\alpha)}_k$ directly,
+we want to normalize it to $\hat{z}^{(\alpha)}_k$
+where $\mathbb{E}\hat{z}^{(\alpha)}_k = 0$
+and $Var[\hat{z}^{(\alpha)}_k] = 1$. 
+To approximate this in a mini-batch setting,
+we consider all the values before activation 
+in the same mini-batch
+$\{z^{(\alpha)}_k(i)\}_{i=1}^B$,
+where $B$ is the size of the mini-batch,
+and we normalize it according to its sample 
+mean and variance. Specifically
+
+\begin{algorithm}[H]
+ % \KwData{this text}
+ % \KwResult{how to write algorithm with \LaTeX2e }
+ Before each activation \\
+ Compute the pre-activation values
+ for each $i$ in the mini-batch \\
+ $z^{(\alpha)}_k(i) = \sum_{j=1}^{N^{(\alpha)}} w_{jk}^{(\alpha-1)} 
+    h_j^{(\alpha-1)}(i) r_j^{(\alpha-1)}
+     + w^{(\alpha)}_{0k}$ \;
+ Compute the sample mean and variance of the batch \\
+ $\mu^{(\alpha)}_k = \frac{1}{B} \sum_{i=1}^B z^{(\alpha)}_k(i)$\;
+ $\sigma^{(\alpha)}_k = \sqrt{\frac{1}{B}
+  \sum_{i=1}^B \left[z^{(\alpha)}_k(i) - 
+                    \mu^{(\alpha)}_k\right]^2}$ \;
+ Normalize the pre-activation values
+ and compute activation outputs \\
+ $\hat{z}^{(\alpha)}_k(i) = 
+  \left[z^{(\alpha)}_k(i) - \mu^{(\alpha)}_k\right] /
+  \sigma^{(\alpha)}_k $ \;
+ $h^{(\alpha)}_k = g^{(\alpha)}
+    \left(\hat{z}^{(\alpha)}_k \right)$
+ 
+ \caption{The Batch Normalization Algorithm}
+\end{algorithm}
+
+
+
 
 
 

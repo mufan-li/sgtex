@@ -1,5 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1457382799 "background.tex" "background.pdf" "background" 1457382799
+["pdflatex"] 1460484707 "/Users/mufanli/GitHub/sgtex/Main Document/background.tex" "/Users/mufanli/GitHub/sgtex/Main Document/background.pdf" "background" 1460484708
+  "/Users/mufanli/GitHub/sgtex/Main Document/background.aux" 1457381730 8 a94a2480d3289e625eea47cd1b285758 ""
+  "/Users/mufanli/GitHub/sgtex/Main Document/background.tex" 1460484704 15295 1c2fe6943b50f874bdaab64ad26ddbf9 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm" 1136768653 1332 f817c21a1ba54560425663374f1b651a ""
@@ -9,8 +11,9 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "background.aux" 1457381730 8 a94a2480d3289e625eea47cd1b285758 ""
-  "background.tex" 1457382779 13517 3b9c4e474080ca620ffd109743691dd9 ""
+  "background.tex" 1460484704 15295 1c2fe6943b50f874bdaab64ad26ddbf9 ""
   (generated)
-  "background.log"
   "background.pdf"
+  "/Users/mufanli/GitHub/sgtex/Main Document/background.pdf"
+  "background.log"
+  "/Users/mufanli/GitHub/sgtex/Main Document/background.log"
